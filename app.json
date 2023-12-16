@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "startstudy-app",
+    "slug": "startstudy-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
