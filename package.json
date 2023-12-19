@@ -9,14 +9,27 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/ubuntu": "^5.0.8",
+    "@mui/material": "^5.15.0",
     "expo": "~49.0.15",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
+    "native-base": "^3.4.28",
     "react": "18.2.0",
-    "react-native": "0.72.6"
+    "react-native": "0.72.6",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-svg": "^12.1.1",
+    "react-native-vector-icons": "^10.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@tsconfig/react-native": "^3.0.2",
+    "@types/jest": "^29.5.11",
+    "@types/react": "^18.2.45",
+    "@types/react-test-renderer": "^18.0.7",
+    "typescript": "^5.3.3"
   },
   "private": true
 }
