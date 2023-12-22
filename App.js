@@ -1,21 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { NativeBaseProvider, Text, Box } from "native-base";
+import SignUp from "./src/Screens/SignUp";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Start Project StartStudy App!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <Box flex={1} bg="#B6B1B1" alignItems="center" justifyContent="center">
+        <SignUp />
+        <StatusBar style="auto" />
+      </Box>
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
