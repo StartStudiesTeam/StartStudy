@@ -2,15 +2,15 @@ import { StyleSheet } from "react-native";
 
 const styleSignUp = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 150,
     gap: 9,
   },
   input: {
     backgroundColor: "#fff",
-    maxWidth:360,
+    maxWidth: 400,
     fontFamily: "Ubuntu",
     fontSize: 16,
     fontStyle: "normal",
@@ -30,7 +30,6 @@ const styleSignUp = StyleSheet.create({
   },
   linkSignIn: {
     color: '#0067A6',
-    fontFamily: "Ubuntu",
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: 400,
@@ -41,7 +40,19 @@ const styleSignUp = StyleSheet.create({
     display: 'flex',
     width: 90,
     margin: 56,
+    marginLeft: 138,
+  },
+  scrollContainer: {
+    width: 360,
+  },
+  iconEye: {
+    position: "absolute",
+    top: 355,
+    left: 320,
+    width: "100%",
+    height: "100%",
   }
+
 });
 
 export default styleSignUp;
