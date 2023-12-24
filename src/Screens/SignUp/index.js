@@ -1,8 +1,19 @@
 import React from "react";
 import { Input, Box, Text, Button, TouchableOpacity } from "native-base";
+import { View } from "native-base";
+import { useNavigation } from '@react-navigation/native';
 import styleSignUp from "./style";
 
 export default function SignUp() {
+
+  const {navigate, goBack} = useNavigation();
+
+  async function irParaTelas() {
+  navigate('ConfirmEmail');
+  }
+
+
+
   return (
     <Box flex={1} bg="#B6B1B1" alignItems="center" justifyContent="center">
       <Box style={styleSignUp.container}>
@@ -50,7 +61,10 @@ export default function SignUp() {
       </Box>
 
       <Box >
-        <Button style={styleSignUp.button}>SIGN UP</Button>
+        <Button 
+        onPress={irParaTelas}
+        
+        style={styleSignUp.button}>SIGN UP</Button>
       </Box>
     </Box>
   );

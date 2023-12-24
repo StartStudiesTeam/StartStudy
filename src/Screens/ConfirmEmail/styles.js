@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const styleSignUp = StyleSheet.create({
+const styleTeste = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -36,13 +36,20 @@ const styleSignUp = StyleSheet.create({
     fontWeight: 400,
     letterSpacing: 0.5,
     alignSelf: "stretch",
+    borderRadius:8,
   },
   button: {
     backgroundColor:'#1976D2',
-    display: 'flex',
     width: 90,
-    margin: 56,
-  }
+    marginTop: 56,
+  },
+  boxImage:{
+    width:120,
+    height:120,
+    backgroundColor:'#D9D9D9',
+    marginBottom:64,
+    borderRadius:16
+  },
+  
 });
-
-export default styleSignUp;
+export default styleTeste;
