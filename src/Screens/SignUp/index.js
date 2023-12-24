@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import { Input, Box, Text, Button, ScrollView, Link, Pressable } from "native-base";
+import { View } from "native-base";
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styleSignUp from "./style";
 
 export default function SignUp() {
   const [isPassoword, setIsPassoword] = useState(true)
+
+  const {navigate, goBack} = useNavigation();
+
+  async function irParaTelas() {
+  navigate('ConfirmEmail');
+  }
+
+
+
   return (
     <Box flex={1} bg="#B6B1B1" alignItems="center" justifyContent="center">
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styleSignUp.scrollContainer}>
@@ -60,7 +71,10 @@ export default function SignUp() {
         </Box>
 
         <Box >
-          <Button style={styleSignUp.button}>SIGN UP</Button>
+          <Button 
+        onPress={irParaTelas}
+        
+        style={styleSignUp.button}>SIGN UP</Button>
         </Box>
 
       </ScrollView>

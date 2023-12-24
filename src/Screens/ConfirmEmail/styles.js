@@ -1,16 +1,16 @@
 import { StyleSheet } from "react-native";
 
-const styleSignUp = StyleSheet.create({
+const styleTeste = StyleSheet.create({
   container: {
+    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 150,
     gap: 9,
   },
   input: {
     backgroundColor: "#fff",
-    maxWidth: 400,
+    maxWidth:360,
     fontFamily: "Ubuntu",
     fontSize: 16,
     fontStyle: "normal",
@@ -30,30 +30,26 @@ const styleSignUp = StyleSheet.create({
   },
   linkSignIn: {
     color: '#0067A6',
+    fontFamily: "Ubuntu",
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: 400,
     letterSpacing: 0.5,
     alignSelf: "stretch",
+    borderRadius:8,
   },
   button: {
     backgroundColor:'#1976D2',
-    display: 'flex',
     width: 90,
-    margin: 56,
-    marginLeft: 138,
+    marginTop: 56,
   },
-  scrollContainer: {
-    width: 360,
+  boxImage:{
+    width:120,
+    height:120,
+    backgroundColor:'#D9D9D9',
+    marginBottom:64,
+    borderRadius:16
   },
-  iconEye: {
-    position: "absolute",
-    top: 355,
-    left: 320,
-    width: "100%",
-    height: "100%",
-  }
-
+  
 });
-
-export default styleSignUp;
+export default styleTeste;
