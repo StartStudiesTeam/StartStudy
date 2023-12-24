@@ -1,15 +1,16 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider, Text, Box } from "native-base";
-import SignUp from "./src/Screens/SignUp";
+import { SafeAreaView } from "react-native";
 
 export default function App() {
   return (
     <NativeBaseProvider>
-      <Box flex={1} bg="#B6B1B1" alignItems="center" justifyContent="center">
-        <SignUp />
-        <StatusBar style="auto" />
-      </Box>
+      <NavigationContainer>
+        <StatusBar />
+        <Routes/>
+      </NavigationContainer>
     </NativeBaseProvider>
   );
 }
