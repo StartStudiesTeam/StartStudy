@@ -7,10 +7,10 @@ import { NativeBaseProvider } from "native-base";
 export default function App() {
   return (
     <NativeBaseProvider>
-      <Box flex={1} bg="#B6B1B1" alignItems="center" justifyContent="center">
-        <SignUp />
-        <StatusBar style="auto" />
-      </Box>
+      <NavigationContainer>
+          <StatusBar barStyle="light-content" backgroundColor="#131313" />
+          <Routes />
+      </NavigationContainer>
     </NativeBaseProvider>
   );
 }
