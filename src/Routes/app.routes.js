@@ -1,13 +1,14 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignUp from '../Screens/SignUp/';
+import SignIn from '../Screens/SignIn/';
 import ConfirmEmail from '../Screens/ConfirmEmail';
 
 const AppStack = createNativeStackNavigator();
 
 function AppRoutes() {
   return (
-    <AppStack.Navigator>
+    <AppStack.Navigator initialRouteName="SignIn">
       <AppStack.Screen
         name="ConfirmEmail"
         component={ConfirmEmail}
@@ -16,6 +17,11 @@ function AppRoutes() {
       <AppStack.Screen
         name="SignUp"
         component={SignUp}
+        options={{headerShown: false}}
+      />
+      <AppStack.Screen
+        name="SignIn"
+        component={SignIn}
         options={{headerShown: false}}
       />
     </AppStack.Navigator>
