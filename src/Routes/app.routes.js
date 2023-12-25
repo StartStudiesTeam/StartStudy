@@ -3,6 +3,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignUp from '../Screens/SignUp/';
 import SignIn from '../Screens/SignIn/';
 import ConfirmEmail from '../Screens/ConfirmEmail';
+import CodeConfirm from '../Screens/CodeConfirm';
+
 
 const AppStack = createNativeStackNavigator();
 
@@ -12,6 +14,11 @@ function AppRoutes() {
       <AppStack.Screen
         name="ConfirmEmail"
         component={ConfirmEmail}
+        options={{headerShown: false}}
+      />
+      <AppStack.Screen
+        name="CodeConfirm"
+        component={CodeConfirm}
         options={{headerShown: false}}
       />
       <AppStack.Screen

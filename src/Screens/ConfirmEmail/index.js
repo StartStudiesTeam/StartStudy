@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Box, Text, Button } from "native-base";
+import { Input, Box, Text, Button,Link } from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import styleConfirmEmail from "./styles";
 
@@ -8,8 +8,8 @@ export default function ConfirmEmail() {
 
   const {navigate, goBack} = useNavigation();
 
-  async function irParaTelas() {
-  navigate('SignUp');
+  async function goToScreen() {
+  navigate('CodeConfirm');
   }
 
   return (
@@ -21,6 +21,7 @@ export default function ConfirmEmail() {
       <Box style={styleConfirmEmail.container}>
   
         <Text style={styleConfirmEmail.labelInput}>Email or Nickname</Text>
+        
         <Input
           style={styleConfirmEmail.input}
           variant="filled"
@@ -28,13 +29,14 @@ export default function ConfirmEmail() {
         />
 
         <Box style={styleConfirmEmail.linkSignIn}>
-          <Text style={styleConfirmEmail.linkSignIn}>Already have an account, log in?</Text>
+        <Link style={styleConfirmEmail.linkSignIn} href="#" onPress={() => goToSignUp()}> 
+        Don't have an account? Register!</Link>
         </Box>
       </Box>
 
       <Box style={styleConfirmEmail.botao}>
         <Button 
-        onPress={irParaTelas}
+        onPress={goToScreen}
         style={styleConfirmEmail.button}>SEND</Button>
       </Box>
 
