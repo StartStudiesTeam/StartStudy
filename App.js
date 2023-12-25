@@ -7,10 +7,10 @@ import { NativeBaseProvider } from "native-base";
 export default function App() {
   return (
     <NativeBaseProvider>
-    <NavigationContainer>
-        <StatusBar backgroundColor="#131313" />
-        <Routes />
-    </NavigationContainer>
+      <NavigationContainer>
+          <StatusBar barStyle="light-content" backgroundColor="#131313" />
+          <Routes />
+      </NavigationContainer>
     </NativeBaseProvider>
   );
 }
