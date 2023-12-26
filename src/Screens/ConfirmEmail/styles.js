@@ -1,6 +1,18 @@
 import { StyleSheet } from "react-native";
+import {Dimensions} from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const styleTeste = StyleSheet.create({
+  containerP: {
+    flex:1,
+    width:windowWidth,
+    height:windowHeight,
+    backgroundColor:"#B6B1B1",
+    alignItems:"center",
+    justifyContent:"center",
+  },
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -36,7 +48,6 @@ const styleTeste = StyleSheet.create({
     fontWeight: 400,
     letterSpacing: 0.5,
     alignSelf: "stretch",
-    borderRadius:8,
   },
   button: {
     backgroundColor:'#1976D2',
