@@ -48,7 +48,7 @@ const styleSignUp = StyleSheet.create({
   },
   iconEye: {
     position: "absolute",
-    top: 355,
+    top: 375,
     left: 320,
     width: "100%",
     height: "100%",
