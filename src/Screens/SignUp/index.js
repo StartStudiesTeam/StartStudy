@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Input, Box, Text, Button, ScrollView, Link, Pressable } from "native-base";
+import { Input, Box, Text, Button, ScrollView, Link, Pressable, FormControl } from "native-base";
 import { View } from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styleSignUp from "./style";
 
 export default function SignUp() {
-  const [isPassoword, setIsPassoword] = useState(true)
+  const [isPassword, setIsPassword] = useState(true)
 
   const {navigate, goBack} = useNavigation();
 
@@ -21,45 +21,65 @@ export default function SignUp() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styleSignUp.scrollContainer}>
 
         <Box style={styleSignUp.container}>
-          <Text style={styleSignUp.labelInput}>Name</Text>
-          <Input
-            style={styleSignUp.input}
-            variant="filled"
-            placeholder="Type your Name"
-          />
 
-          <Text style={styleSignUp.labelInput}>Nick Name</Text>
-          <Input
-            style={styleSignUp.input}
-            variant="filled"
-            placeholder="Create a Nickname"
-          />
+        <FormControl>
+        <FormControl.Label>Name</FormControl.Label>
+        <Input
+        backgroundColor="#fff"
+        placeholder="Type your name"
+        InputLeftElement={<Icon name="user" size={20} color="#ccc"  style={{ marginLeft: 12, marginRight: 12 }} />}
+        style={styleSignUp.input} />
+        <FormControl.ErrorMessage>
+        </FormControl.ErrorMessage>
+      </FormControl>
 
-          <Text style={styleSignUp.labelInput}>Email</Text>
-          <Input
-            style={styleSignUp.input}
-            variant="filled"
-            placeholder="Type your email"
-          />
+      <FormControl>
+        <FormControl.Label>Nick Name</FormControl.Label>
+        <Input
+        backgroundColor="#fff"
+        placeholder="Create a nickname"
+        InputLeftElement={<Icon name="user-circle" size={20} color="#ccc"  style={{ marginLeft: 12, marginRight: 12 }} />}
+        style={styleSignUp.input} />
+        <FormControl.ErrorMessage>
+        </FormControl.ErrorMessage>
+      </FormControl>
 
-          <Text style={styleSignUp.labelInput}>Phone Number</Text>
-          <Input
-            style={styleSignUp.input}
-            variant="filled"
-            placeholder="Type your phone number"
-          />
+      <FormControl>
+        <FormControl.Label>Email</FormControl.Label>
+        <Input
+        backgroundColor="#fff"
+        placeholder="Type your email"
+        InputLeftElement={<Icon name="at" size={20} color="#ccc"  style={{ marginLeft: 12, marginRight: 12 }} />}
+        style={styleSignUp.input} />
+        <FormControl.ErrorMessage>
+        </FormControl.ErrorMessage>
+      </FormControl>
 
-          <Text style={styleSignUp.labelInput}>Password</Text>
-          <Input
-            style={styleSignUp.input}
-            variant="filled"
-            secureTextEntry={isPassoword}
-            placeholder="Create your security Password "
-          />
+      <FormControl>
+        <FormControl.Label>Phone number</FormControl.Label>
+        <Input
+        backgroundColor="#fff"
+        placeholder="Typer your phone number"
+        InputLeftElement={<Icon name="phone" size={20} color="#ccc"  style={{ marginLeft: 12, marginRight: 12 }} />}
+        style={styleSignUp.input} />
+        <FormControl.ErrorMessage>
+        </FormControl.ErrorMessage>
+      </FormControl>
 
-          <Pressable style={styleSignUp.iconEye} onPress={() => setIsPassoword(!isPassoword)}>
-            {isPassoword == true ?
-                        <Icon name="eye-slash" size={25} color="#000"  />
+      <FormControl>
+        <FormControl.Label>Password</FormControl.Label>
+        <Input
+        backgroundColor="#fff"
+        placeholder="Create your security password"
+        InputLeftElement={<Icon name="lock" size={20} color="#ccc"  style={{ marginLeft: 12, marginRight: 12 }} />}
+        style={styleSignUp.input} 
+        secureTextEntry={isPassword}/>
+        <FormControl.ErrorMessage>
+        </FormControl.ErrorMessage>
+      </FormControl>
+          <Pressable style={styleSignUp.iconEye} onPress={() => setIsPassword(!isPassword)}>
+            {isPassword == true ?
+                        <Icon name="eye-slash" size={25} color="#ccc"  />
                         :
                         <Icon name="eye" size={25} color="#000" />
             }
@@ -73,7 +93,6 @@ export default function SignUp() {
         <Box >
           <Button 
         onPress={irParaTelas}
-        
         style={styleSignUp.button}>SIGN UP</Button>
         </Box>
 
