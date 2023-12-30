@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, Box, Text, Button,Link } from "native-base";
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import styleConfirmEmail from "./styles";
 
 
@@ -9,7 +10,7 @@ export default function ConfirmEmail() {
   const {navigate, goBack} = useNavigation();
 
   async function goToScreen() {
-  navigate('CodeConfirm');
+  navigate('RecoveryPassword');
   }
 
   return (
@@ -23,15 +24,17 @@ export default function ConfirmEmail() {
         <Text style={styleConfirmEmail.labelInput}>Email or Nickname</Text>
         
         <Input
+          InputLeftElement={<Icon style={{marginLeft:17}}name="at" size={20} color="#ccc"/>}
           style={styleConfirmEmail.input}
           variant="filled"
-          placeholder="@ Type your e-mail or nickname"
+          placeholder="Type your e-mail or nickname"
         />
 
-        <Box style={styleConfirmEmail.linkSignIn}>
-        <Link style={styleConfirmEmail.linkSignIn} href="#" onPress={() => goToSignUp()}> 
+       
+        <Link style={styleConfirmEmail.linkSignIn} 
+        href="#" onPress={() => goToSignUp()}> 
         Don't have an account? Register!</Link>
-        </Box>
+       
       </Box>
 
       <Box style={styleConfirmEmail.botao}>

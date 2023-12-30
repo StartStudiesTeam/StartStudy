@@ -22,7 +22,8 @@ const styleTeste = StyleSheet.create({
   },
   input: {
     backgroundColor: "#fff",
-    maxWidth:360,
+    maxWidth:328,
+    maxHeight:48,
     fontFamily: "Ubuntu",
     fontSize: 16,
     fontStyle: "normal",
@@ -39,11 +40,12 @@ const styleTeste = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0.5,
     alignSelf: "stretch",
+    marginBottom:8,
   },
   linkSignIn: {
-    color: '#0067A6',
+    
     fontFamily: "Ubuntu",
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: "normal",
     fontWeight: 400,
     letterSpacing: 0.5,

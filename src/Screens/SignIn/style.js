@@ -69,7 +69,14 @@ const styleSignIn = StyleSheet.create({
     fontWeight: 400,
     fontSize: 12,
     alignSelf: "stretch",
-  }
+  },
+  button: {
+    backgroundColor:'#1976D2',
+    display: 'flex',
+    width: 90,
+    marginTop:56,
+  },
+  
 });
 
 export default styleSignIn;
