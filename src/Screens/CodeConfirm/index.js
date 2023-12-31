@@ -13,9 +13,8 @@ export default function ConfirmEmail() {
   async function goToSignIn() {
     setIsLoanding(true),
     setTimeout(( )=>{
-      console.log(loading,);
-      navigate('SignIn');
-      setIsLoanding(false);
+    navigate('RecoveryPassword');
+    setIsLoanding(false);
     },2000)
   }
   

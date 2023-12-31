@@ -18,7 +18,7 @@ export default function SignIn() {
         <Box style={styleSignIn.container} >
             <Formik
                 initialValues={{ email: '', password: '' }}
-                onSubmit={values => console.log('Valores do formulário:', values)}
+                onSubmit={values =>('Valores do formulário:', values)}
                 validationSchema={yup.object().shape({
                     email: yup
                         .string()
@@ -75,7 +75,11 @@ export default function SignIn() {
                                     Already have an account, sign in?
                                 </Link>
                             </Box>
-                            <Button onPress={handleSubmit} style={styleSignIn.button} isDisabled={!isValid}>Sign In</Button>
+                            <Box >
+                            <Button 
+                                onPress={handleSubmit}
+                                style={styleSignIn.button} isDisabled={!isValid}>SIGN UP</Button>
+                           </Box>
                         </Box>
                     </Box>
                 )}

@@ -4,6 +4,7 @@ import SignUp from '../Screens/SignUp/';
 import SignIn from '../Screens/SignIn/';
 import ConfirmEmail from '../Screens/ConfirmEmail';
 import CodeConfirm from '../Screens/CodeConfirm';
+import RecoveryPassword from '../Screens/RecoveryPassword';
 
 
 const AppStack = createNativeStackNavigator();
@@ -29,6 +30,11 @@ function AppRoutes() {
       <AppStack.Screen
         name="SignIn"
         component={SignIn}
+        options={{headerShown: false}}
+      />
+      <AppStack.Screen
+        name="RecoveryPassword"
+        component={RecoveryPassword}
         options={{headerShown: false}}
       />
     </AppStack.Navigator>
