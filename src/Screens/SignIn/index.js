@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { Input, Box, Text, Button, Link, Pressable, FormControl } from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
+import { Alert } from 'react-native';
 import * as yup from 'yup'
 import { Formik } from "formik";
 import styleSignIn from "./style";
@@ -10,8 +12,36 @@ export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
     const { navigate, goBack } = useNavigation();
 
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
     async function goToScreen() {
         navigate('SignUp');
+    }
+
+    async function login() {
+      if (!email || !password) {
+        Alert.alert('Atenção', 'Email e senha devem ser informados!');
+        return;
+      }
+    
+      try {
+        const response = await axios.post('http://server-aqui-para-login/login', {
+          email,
+          password,
+        });
+        if (response.data.success) {
+          Alert.alert('Bem-vindo:' + value?.user?.email);
+          setEmail('');
+          setPassword('');
+          navigate('Home');
+        } else {
+          Alert.alert('Credenciais inválidas');
+        }
+      } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        Alert.alert('Ops, algo deu errado!');
+      }
     }
 
     return (
@@ -38,9 +68,9 @@ export default function SignIn() {
                                 <FormControl isInvalid={!isValid} style={styleSignIn.formControl}>
                                     <FormControl.Label style={styleSignIn.labelInput} >Email</FormControl.Label>
                                     <Input
-                                        value={values.email}
-                                        onChangeText={handleChange('email')}
-                                        onBlur={() => setFieldTouched('email')}
+                                        //value={values.email}
+                                        onChangeText={value => setEmail(value)}
+                                        onBlur={() => setFieldTouched(email)}
                                         style={styleSignIn.input}
                                         variant="filled"
                                         placeholder="Type your Email"
@@ -55,14 +85,14 @@ export default function SignIn() {
                                 <FormControl isInvalid={!isValid} style={styleSignIn.formControl}>
                                     <FormControl.Label style={styleSignIn.labelInput}>Password</FormControl.Label>
                                     <Input
-                                        value={values.password}
-                                        onChangeText={handleChange('password')}
-                                        onBlur={() => setFieldTouched('password')}
+                                        //value={values.password}
+                                        onChangeText={value => setPassword(value)}
+                                        //onBlur={() => setFieldTouched(password)}
                                         style={styleSignIn.input}
                                         variant="filled"
                                         type={showPassword ? "text" : "password"}
                                         placeholder="Type your Password"
-                                        InputLeftElement={<Icon name="lock" size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />}
+                                        InputLeftElement={<Icon name="lock" size={20} color="#ccc" style={{marginLeft: 12, marginRight: 12 }} />}
                                         InputRightElement={
                                             <Pressable onPress={() => setShowPassword(!showPassword)}>
                                                 <Icon name={showPassword ? "eye" : "eye-slash"} size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />
@@ -77,8 +107,8 @@ export default function SignIn() {
                             </Box>
                             <Box >
                             <Button 
-                                onPress={handleSubmit}
-                                style={styleSignIn.button} isDisabled={!isValid}>SIGN UP</Button>
+                                onPress={login}
+                                style={styleSignIn.button}>SIGN UP</Button>
                            </Box>
                         </Box>
                     </Box>

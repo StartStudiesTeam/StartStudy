@@ -56,12 +56,14 @@ const styleSignIn = StyleSheet.create({
     color: "#FFF",
   },
   input: {
+    
     borderRadius: 8,
     fontFamily: "Ubuntu",
     fontSize: 16,
     fontStyle: "normal",
     lineHeight: 24,
     letterSpacing: 0.5,
+   
   },
   link: {
     fontFamily: "Ubuntu",
