@@ -23,6 +23,7 @@ const styleCodeConfirm = StyleSheet.create({
         marginTop:8,
       },
       input: {
+        backgroundColor:'#FFF',
         textAlign:"center",
         maxWidth:48,
         maxHeight:48,

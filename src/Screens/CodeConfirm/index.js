@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View} from 'react-native'
+import React, {useRef, useState} from 'react';
+import {TextInput, View} from 'react-native'
 import { Input, Box, Text, Button,Link, Spinner} from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import styleCodeConfirm from "./styles";
@@ -13,7 +13,7 @@ export default function ConfirmEmail() {
   async function goToSignIn() {
     setIsLoanding(true),
     setTimeout(( )=>{
-    navigate('RecoveryPassword');
+    navigate('SignIn');
     setIsLoanding(false);
     },2000)
   }
@@ -21,6 +21,18 @@ export default function ConfirmEmail() {
   async function goToSignUp() {
   navigate('SignUp');
   }
+
+  const inputRefs = useRef<Array<Text>>>([])
+
+  const handleChange = (text, index) => {
+    if (text.length !== 0) {
+      return inputRefs?.current[index + 1]?.focus()
+      
+    }
+    return inputRefs?.current[index - 1]?.focus()
+  }
+
+
 
   return (
     <Box style={styleCodeConfirm.contarinerP}> 
@@ -36,6 +48,8 @@ export default function ConfirmEmail() {
           placeholder="|"
           type='password'
           keyboardType='numeric'
+          maxLength={1}
+          autoFocus={true}
         />
        <Input
           style={styleCodeConfirm.input}
@@ -43,6 +57,16 @@ export default function ConfirmEmail() {
           placeholder="|"
           type='password'
           keyboardType='numeric'
+          maxLength={1}
+        />
+       <Input
+          style={styleCodeConfirm.input}
+          variant="filled"
+          placeholder="|"
+          type='password'
+          maxLength={1}
+          keyboardType='numeric'
+          
         />
        <Input
           style={styleCodeConfirm.input}
@@ -50,13 +74,7 @@ export default function ConfirmEmail() {
           placeholder="|"
           type='password'
           keyboardType='numeric'
-        />
-       <Input
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
+          maxLength={1}
         />
         <Input
           style={styleCodeConfirm.input}
@@ -64,6 +82,7 @@ export default function ConfirmEmail() {
           placeholder="|"
           type='password'
           keyboardType='numeric'
+          maxLength={1}
         />
        <Input
           style={styleCodeConfirm.input}
@@ -71,6 +90,7 @@ export default function ConfirmEmail() {
           placeholder="|"
           type='password'
           keyboardType='numeric'
+          maxLength={1}
         />
     </Box>
         <Link style={styleCodeConfirm.linkSignIn} href="#" onPress={() => goToSignUp()}> 

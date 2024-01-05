@@ -14,7 +14,7 @@ export default function ConfirmEmail() {
   async function goToSignIn() {
     setIsLoanding(true),
     setTimeout(( )=>{
-      navigate('SignIn');
+      navigate('CodeConfirm');
       setIsLoanding(false);
     },2000)
     Snackbar.show({
