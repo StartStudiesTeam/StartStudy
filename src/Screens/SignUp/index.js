@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { Input, Box, Text, Button, ScrollView, Link, Pressable, FormControl } from "native-base";
+import { Input, Box, Text, Button, ScrollView, Link, Pressable, FormControl,Spinner } from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import api from '../../Services/api'
 import * as yup from 'yup'
 import { Formik } from "formik";
 import styleSignUp from "./style";
@@ -9,30 +10,49 @@ import styleSignUp from "./style";
 export default function SignUp() {
   const [isPassword, setIsPassword] = useState(true)
   const { navigate, goBack } = useNavigation();
+  const [loading, setIsLoanding] = useState(false);
 
-  async function irParaTelas() {
-    navigate('ConfirmEmail');
-  }
+  const handleSubmit = async (values) => {
+    try {
+      setIsLoanding(true)
+      const response = await api.post('SignUp', {
+        name: values.name,
+        nick_name: values.nick_name,
+        email: values.email,
+        password: values.password,
+        phone_number: values.phone_number,
+      });
+      console.log('Resposta da API:', response);
+      setTimeout(( )=>{
+        setIsLoanding(false);
+        navigate('SignIn');
+      },2000)
+      return response; // Retornando os dados para onde a função foi chamada, se necessário.
+    } catch (error) {
+      console.error('Erro ao registrar usuário:', error.message);
+      setIsLoanding(false);
+    }
+  };
 
   return (
     <Box flex={1} bg="#B6B1B1" alignItems="center" justifyContent="center">
       <Formik
-        initialValues={{ name: '', nickName: '', email: '', phone: '', password: '' }}
-        onSubmit={values => console.log('Valores do formulario', values)}
+        initialValues={{ name: '', nick_name: '', email: '', phone_number: '', password: '' }}
+        onSubmit={handleSubmit}
         validationSchema={yup.object().shape({
           name: yup
             .string()
             .required('The name is mandatory'),
-          nickName: yup
+          nick_name: yup
             .string()
-            .required('Nick name is required')
-            .min(5, 'Nick name must have at least 5 characters')
-            .max(15, 'Nick name must have a maximum of 15 characters'),
+            .required('nick_name is required')
+            .min(5, 'nick_name must have at least 5 characters')
+            .max(15, 'nick_name must have a maximum of 15 characters'),
           email: yup
             .string()
             .email('Invalid email address format')
             .required('Email is required'),
-          phone: yup
+          phone_number: yup
             .string()
             .min(11, 'The telephone number must have at least 11 digits')
             .required('A phone number is required'),
@@ -66,15 +86,15 @@ export default function SignUp() {
                 }
               </FormControl>
 
-              <FormControl isInvalid={touched.nickName && !isValid}>
+              <FormControl isInvalid={touched.nick_name && !isValid}>
                 <FormControl.Label>Nick Name</FormControl.Label>
                 <Input
-                  value={values.nickName}
                   onChangeText={(text) => {
-                    handleChange('nickName')(text);
-                    setFieldTouched('nickName', true)
+                    handleChange('nick_name')(text);
+                    setFieldTouched('nick_name', true)
                   }}
-                  onBlur={() => setFieldTouched('nickName')}
+                  value={values.nick_name}
+                  onBlur={() => setFieldTouched('nick_name')}
                   backgroundColor="#fff"
                   placeholder="Create a nickname"
                   InputLeftElement={<Icon name="user-circle" size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />}
@@ -106,15 +126,15 @@ export default function SignUp() {
                 }
               </FormControl>
 
-              <FormControl isInvalid={touched.phone && !isValid}>
+              <FormControl isInvalid={touched.phone_number && !isValid}>
                 <FormControl.Label>Phone number</FormControl.Label>
                 <Input
-                  value={values.phone}
                   onChangeText={(text) => {
-                    handleChange('phone')(text.replace(/\D/g, '').slice(0, 11))
-                    setFieldTouched('phone', true)
+                    handleChange('phone_number')(text.replace(/\D/g, '').slice(0, 11))
+                    setFieldTouched('phone_number', true)
                   }}
-                  onBlur={() => setFieldTouched('phone')}
+                  value={values.phone_number}
+                  onBlur={() => setFieldTouched('phone_number')}
                   backgroundColor="#fff"
                   placeholder="Typer your phone number"
                   InputLeftElement={<Icon name="phone" size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />}
@@ -129,11 +149,11 @@ export default function SignUp() {
               <FormControl isInvalid={touched.password && !isValid}>
                 <FormControl.Label>Password</FormControl.Label>
                 <Input
-                  value={values.password}
                   onChangeText={(text) => {
                     handleChange('password')(text)
                     setFieldTouched('password', true)
                   }}
+                  value={values.password}
                   onBlur={() => setFieldTouched('password')}
                   backgroundColor="#fff"
                   placeholder="Create your security password"
@@ -157,7 +177,13 @@ export default function SignUp() {
             </Box>
 
             <Box >
-              <Button onPress={() => { irParaTelas(); handleSubmit(); }} style={styleSignUp.button}>SIGN UP</Button>
+              <Button onPress={() => handleSubmit()} 
+              style={styleSignUp.button}
+              >{loading ? (
+                <Spinner color={'cyan.500'} />
+              ) : (
+                <Text>SIGN UP</Text>
+              )}</Button>
             </Box>
           </ScrollView>
         )}

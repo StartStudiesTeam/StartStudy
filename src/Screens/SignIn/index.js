@@ -1,54 +1,45 @@
 import { React, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { Input, Box, Text, Button, Link, Pressable, FormControl } from "native-base";
+import { Input, Box, Text, Button, Link, Pressable, FormControl,Spinner} from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import axios from 'axios';
-import { Alert } from 'react-native';
 import * as yup from 'yup'
 import { Formik } from "formik";
 import styleSignIn from "./style";
+import api from "../../Services/api";
 
 export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
-    const { navigate, goBack } = useNavigation();
-
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const { navigate, goBack } = useNavigation()
+    const [loading, setIsLoanding] = useState(false);
 
     async function goToScreen() {
-        navigate('SignUp');
+    navigate('SignUp');
     }
+      
 
-    async function login() {
-      if (!email || !password) {
-        Alert.alert('Atenção', 'Email e senha devem ser informados!');
-        return;
-      }
-    
-      try {
-        const response = await axios.post('http://server-aqui-para-login/login', {
-          email,
-          password,
-        });
-        if (response.data.success) {
-          Alert.alert('Bem-vindo:' + value?.user?.email);
-          setEmail('');
-          setPassword('');
-          navigate('Home');
-        } else {
-          Alert.alert('Credenciais inválidas');
+    const handleSubmit = async (values) => {
+        try {
+          setIsLoanding(true)
+          const response = await api.post('SignIn', {
+            email: values.email,
+            password: values.password,
+          });
+          console.log('Resposta da API:', response);
+          setTimeout(( )=>{
+            setIsLoanding(false);
+            navigate('HomePage');
+          },2000)
+        } catch (error) {
+          console.error('Erro ao realizar login:', error.message);
+          setIsLoanding(false);
         }
-      } catch (error) {
-        console.error('Erro ao fazer login:', error);
-        Alert.alert('Ops, algo deu errado!');
-      }
-    }
+      };
 
     return (
         <Box style={styleSignIn.container} >
             <Formik
                 initialValues={{ email: '', password: '' }}
-                onSubmit={values =>('Valores do formulário:', values)}
+                onSubmit={handleSubmit}
                 validationSchema={yup.object().shape({
                     email: yup
                         .string()
@@ -68,9 +59,12 @@ export default function SignIn() {
                                 <FormControl isInvalid={!isValid} style={styleSignIn.formControl}>
                                     <FormControl.Label style={styleSignIn.labelInput} >Email</FormControl.Label>
                                     <Input
-                                        //value={values.email}
-                                        onChangeText={value => setEmail(value)}
-                                        onBlur={() => setFieldTouched(email)}
+                                        value={values.email}
+                                        onChangeText={(text) => {
+                                            handleChange('email')(text)
+                                            setFieldTouched('email', true)
+                                          }}
+                                        onBlur={() => setFieldTouched('email')}
                                         style={styleSignIn.input}
                                         variant="filled"
                                         placeholder="Type your Email"
@@ -85,9 +79,12 @@ export default function SignIn() {
                                 <FormControl isInvalid={!isValid} style={styleSignIn.formControl}>
                                     <FormControl.Label style={styleSignIn.labelInput}>Password</FormControl.Label>
                                     <Input
-                                        //value={values.password}
-                                        onChangeText={value => setPassword(value)}
-                                        //onBlur={() => setFieldTouched(password)}
+                                        value={values.password}
+                                        onChangeText={(text) => {
+                                            handleChange('password')(text)
+                                            setFieldTouched('password', true)
+                                          }}
+                                        onBlur={() => setFieldTouched('password')}
                                         style={styleSignIn.input}
                                         variant="filled"
                                         type={showPassword ? "text" : "password"}
@@ -102,14 +99,18 @@ export default function SignIn() {
                                     </FormControl.ErrorMessage>
                                 </FormControl>
                                 <Link style={styleSignIn.link} href="#" onPress={() => goToScreen()}>
-                                    Already have an account, sign in?
+                                    Already have an account, sign up?
                                 </Link>
                             </Box>
                             <Box >
-                            <Button 
-                                onPress={login}
-                                style={styleSignIn.button}>SIGN UP</Button>
-                           </Box>
+                            <Button onPress={() => handleSubmit()} 
+                             style={styleSignIn.button}
+                             >{loading ? (
+                                <Spinner color={'cyan.500'} />
+                                ) : (
+                                 <Text style={{color:"#FFF"}}>SIGN IN</Text>
+                             )}</Button>
+                           </Box> 
                         </Box>
                     </Box>
                 )}
