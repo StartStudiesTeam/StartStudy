@@ -27,7 +27,7 @@ export default function SignIn() {
           console.log('Resposta da API:', response);
           setTimeout(( )=>{
             setIsLoanding(false);
-            navigate('HomePage');
+            navigate('ConfirmEmail');
           },2000)
         } catch (error) {
           console.error('Erro ao realizar login:', error.message);

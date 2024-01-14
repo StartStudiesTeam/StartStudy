@@ -27,12 +27,16 @@ export default function SignUp() {
         setIsLoanding(false);
         navigate('SignIn');
       },2000)
-      return response; // Retornando os dados para onde a função foi chamada, se necessário.
+      //return response; // Retornando os dados para onde a função foi chamada, se necessário.
     } catch (error) {
       console.error('Erro ao registrar usuário:', error.message);
       setIsLoanding(false);
     }
   };
+
+  async function goToScreen() {
+    navigate('SignIn');
+    }
 
   return (
     <Box flex={1} bg="#B6B1B1" alignItems="center" justifyContent="center">
@@ -172,7 +176,7 @@ export default function SignUp() {
               </FormControl>
 
               <Box style={styleSignUp.linkSignIn}>
-                <Link href="#"><Text style={styleSignUp.linkSignIn} >Já tem conta, fazer login?</Text></Link>
+                <Link href="#" onPress={goToScreen}><Text style={styleSignUp.linkSignIn} >Já tem conta, fazer login?</Text></Link>
               </Box>
             </Box>
 

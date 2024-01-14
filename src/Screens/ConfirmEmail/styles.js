@@ -20,17 +20,24 @@ const styleTeste = StyleSheet.create({
     alignItems: 'center',
     gap: 9,
   },
+  formControl: {
+    backgroundColor:'#fff',
+    display: "flex",
+    width: 328,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+  },
   input: {
     backgroundColor: "#fff",
-    maxWidth:328,
-    maxHeight:48,
     fontFamily: "Ubuntu",
     fontSize: 16,
     fontStyle: "normal",
-    lineHeight: 24,
     letterSpacing: 0.5,
+    borderRadius:8,
   },
   labelInput: {
+    marginBottom:8,
     color: "#FFF",
     transform: [{ translateY: 6 }],
     fontFamily: "Ubuntu",
@@ -40,10 +47,8 @@ const styleTeste = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0.5,
     alignSelf: "stretch",
-    marginBottom:8,
   },
   linkSignIn: {
-    
     fontFamily: "Ubuntu",
     fontSize: 14,
     fontStyle: "normal",
