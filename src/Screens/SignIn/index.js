@@ -13,7 +13,7 @@ export default function SignIn() {
     const [loading, setIsLoanding] = useState(false);
 
     async function goToScreen() {
-    navigate('SignUp');
+    navigate('ConfirmEmail'); //em caso de esqueceu a senha
     }
       
 
@@ -27,7 +27,7 @@ export default function SignIn() {
           console.log('Resposta da API:', response);
           setTimeout(( )=>{
             setIsLoanding(false);
-            navigate('ConfirmEmail');
+            navigate('HomePage');
           },2000)
         } catch (error) {
           console.error('Erro ao realizar login:', error.message);
@@ -98,7 +98,7 @@ export default function SignIn() {
                                         {errors.password}
                                     </FormControl.ErrorMessage>
                                 </FormControl>
-                                <Link style={styleSignIn.link} href="#" onPress={() => goToScreen()}>
+                                <Link style={styleSignIn.link} onPress={() => goToScreen()}>
                                     Already have an account, sign up?
                                 </Link>
                             </Box>

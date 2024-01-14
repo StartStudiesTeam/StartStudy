@@ -11,10 +11,10 @@ export default function ConfirmEmail() {
   const [loading, setIsLoanding] = useState(false);
   const [isPassword, setIsPassword] = useState(true)
 
-  async function goToSignIn() {
+  async function newPassword() {
     setIsLoanding(true),
     setTimeout(( )=>{
-      navigate('CodeConfirm');
+      navigate('SignIn');
       setIsLoanding(false);
     },2000)
     Snackbar.show({
@@ -25,8 +25,8 @@ export default function ConfirmEmail() {
       });
   }
   
-  async function goToSignUp() {
-  navigate('SignUp');
+  async function goToSignIn() {
+  navigate('SignIn');
   }
 
   return (
@@ -57,13 +57,13 @@ export default function ConfirmEmail() {
     </Box>
 
     <Link style={styleRecoveryPassword.linkSignIn} 
-    href="#" onPress={() => goToSignUp()}> 
+    onPress={() => goToSignIn()}> 
     Return and sign in?</Link>
     </Box>
 
       <Box style={styleRecoveryPassword.boxBotao}>
         <Button 
-        onPress={goToSignIn}
+        onPress={() => newPassword()}
         style={styleRecoveryPassword.button}>
         {loading ? (
           <Spinner color={'cyan.500'} />
