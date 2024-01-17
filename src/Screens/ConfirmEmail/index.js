@@ -14,31 +14,13 @@ export default function ConfirmEmail() {
   const [loading, setIsLoanding] = useState(false);
 
   async function goToScreen() {
-  navigate('RecoveryPassword');
+  navigate('SignUp');
   }
-
-
-  // const submitCode = async (values) => {
-  //   try {
-  //     setIsLoanding(true)
-  //     const response = await api.get('CodeConfirm', {
-  //       email: values.email
-  //     });
-  //     console.log('Resposta da API:', response);
-  //     setTimeout(( )=>{
-  //       setIsLoanding(false);
-  //       navigate('CodeConfirm');
-  //     },2000)
-  //   } catch (error) {
-  //     console.error('Erro ao realizar login:', error.message);
-  //     setIsLoanding(false);
-  //   }
-  // };
 
   const submitCode2 = async (values) => {
     try {
       setIsLoanding(true);
-      const response = await api.get('CodeConfirm', {
+      const response = await api.get('MailCheck', {
         email: values.email
       });
       const confirmationCode = response.confirmationCode;

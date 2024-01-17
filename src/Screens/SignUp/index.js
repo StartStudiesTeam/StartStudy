@@ -25,7 +25,7 @@ export default function SignUp() {
       console.log('Resposta da API:', response);
       setTimeout(( )=>{
         setIsLoanding(false);
-        navigate('SignIn');
+        navigate('CodeConfirm');
       },2000)
       //return response; // Retornando os dados para onde a função foi chamada, se necessário.
     } catch (error) {
@@ -176,7 +176,7 @@ export default function SignUp() {
               </FormControl>
 
               <Box style={styleSignUp.linkSignIn}>
-                <Link href="#" onPress={goToScreen}><Text style={styleSignUp.linkSignIn} >Já tem conta, fazer login?</Text></Link>
+                <Link onPress={goToScreen}><Text style={styleSignUp.linkSignIn} >Already have an account, log in?</Text></Link>
               </Box>
             </Box>
 
