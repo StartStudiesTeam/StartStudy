@@ -10,33 +10,21 @@ export default function ConfirmEmail() {
   const {navigate, goBack} = useNavigation();
   const [loading, setIsLoanding] = useState(false);
 
-  const [inputValues, setInputValue] = useState(["", "", "", "", "", ""]);
+  const data = []
 
   const submitCode = async () => {
     try {
       setIsLoanding(true)
-      const response = await api.get('CodeConfirm', {
-        token
+      const token = data.join('')
+      await api.post('/mailcheck',{
+       token
       });
-      console.log('Resposta da API:', response);
-
-      const apiToken = response.token;
-      for (let index = 0; index < apiToken.length; index++) {
-        const currentChar = apiToken.charAt(index);
-        setInputValue((prevInputValues) => {
-          const newInputValues = [...prevInputValues];
-          newInputValues[index] = currentChar;
-          return newInputValues;
-        });
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
       setTimeout(( )=>{
-        setIsLoanding(false);
-        navigate('HomePage');
-      },2000)
-    } catch (error) {
-      console.error('Erro ao realizar login:', error.message);
       setIsLoanding(false);
+      navigate('HomePage');
+    },2000)
+    } catch (error) {
+      setIsLoanding(false);  
     }
   };
 
@@ -44,20 +32,20 @@ export default function ConfirmEmail() {
   navigate('SignUp');
   }
 
+  
   let inputComponents = [];
-  for (let index = 0; index < inputValues.length; index++) {
+  for (let index = 0; index <= 5; index++) {
   inputComponents.push(
     <Input
       key={index}
       style={styleCodeConfirm.input}
       variant="filled"
       placeholder="|"
-      type='password'
+      // type='password'
       keyboardType='default'
       maxLength={1}
       autoFocus={index === 0}
-      value={inputValues[index[0]]}
-      onChangeText={(text) =>  {console.log(text);}}
+      onChangeText={(text) =>  {data[index] = text}}
     />
   );
 }

@@ -30,7 +30,6 @@ export default function ConfirmEmail() {
         navigate('CodeConfirm');
       }, 2000);
     } catch (error) {
-      console.error('Erro ao realizar login:', error.message);
       setIsLoanding(false);
     }
   };
