@@ -1,9 +1,9 @@
 import { React, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { Input, Box, Text, Button, Link, Pressable, FormControl,Spinner} from "native-base";
+import { Input, Box, Text, Button, Link, Pressable, FormControl,Spinner, useToast} from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as yup from 'yup'
-import { Formik } from "formik";
+import { ErrorMessage, Formik } from "formik";
 import styleSignIn from "./style";
 import api from "../../Services/api";
 
@@ -11,9 +11,11 @@ export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
     const { navigate, goBack } = useNavigation()
     const [loading, setIsLoanding] = useState(false);
+    const toast = useToast();
+
 
     async function goToScreen() {
-    navigate('ConfirmEmail'); //em caso de esqueceu a senha
+    navigate('SignUp');
     }
       
 
@@ -24,13 +26,15 @@ export default function SignIn() {
             email: values.email,
             password: values.password,
           });
-          console.log('Resposta da API:', response);
+          console.error('resposta da api', response)
           setTimeout(( )=>{
             setIsLoanding(false);
             navigate('HomePage');
           },2000)
         } catch (error) {
-          console.error('Erro ao realizar login:', error.message);
+            toast.show({
+                description: `${error.message}`
+            })
           setIsLoanding(false);
         }
       };
