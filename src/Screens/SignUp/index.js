@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { Input, Box, Text, Button, ScrollView, Link, Pressable, FormControl,Spinner } from "native-base";
+import { Input, Box, Text, Button, ScrollView, Link, Pressable, FormControl,Spinner, useToast } from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import api from '../../Services/api'
 import * as yup from 'yup'
@@ -11,6 +11,7 @@ export default function SignUp() {
   const [isPassword, setIsPassword] = useState(true)
   const { navigate, goBack } = useNavigation();
   const [loading, setIsLoanding] = useState(false);
+  const toast = useToast()
 
   const handleSubmit = async (values) => {
     try {
@@ -22,14 +23,18 @@ export default function SignUp() {
         password: values.password,
         phone_number: values.phone_number,
       });
-      console.log('Resposta da API:', response);
+      toast.show({
+        description: `Cadastrado com sucesso ${values.name}`
+      })
       setTimeout(( )=>{
         setIsLoanding(false);
         navigate('CodeConfirm');
       },2000)
-      //return response; // Retornando os dados para onde a função foi chamada, se necessário.
+      return response; 
     } catch (error) {
-      console.error('Erro ao registrar usuário:', error.message);
+      toast.show({
+        description: `${error.message}`
+      })
       setIsLoanding(false);
     }
   };
@@ -50,8 +55,8 @@ export default function SignUp() {
           nick_name: yup
             .string()
             .required('nick_name is required')
-            .min(5, 'nick_name must have at least 5 characters')
-            .max(15, 'nick_name must have a maximum of 15 characters'),
+            .min(3, 'nick_name must have at least 3 characters')
+            .max(16, 'nick_name must have a maximum of 16 characters'),
           email: yup
             .string()
             .email('Invalid email address format')
