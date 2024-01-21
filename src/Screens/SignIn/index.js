@@ -26,7 +26,6 @@ export default function SignIn() {
             email: values.email,
             password: values.password,
           });
-          console.error('resposta da api', response)
           setTimeout(( )=>{
             setIsLoanding(false);
             navigate('HomePage');
