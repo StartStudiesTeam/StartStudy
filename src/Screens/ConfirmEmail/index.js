@@ -25,7 +25,7 @@ export default function ConfirmEmail() {
         email: values.email
       });
       toast.show({
-        description: `Verifique seu E-mail`
+        description: `Verifique seu Email`
       })
       const confirmationCode = response.confirmationCode;
       await sendEmail(values.email, confirmationCode);
