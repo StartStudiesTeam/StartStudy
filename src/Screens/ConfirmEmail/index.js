@@ -1,5 +1,5 @@
 import React ,{ useState } from 'react';
-import { Input, Box, Text, Button,Link,Spinner,FormControl } from "native-base";
+import { Input, Box, Text, Button,Link,Spinner,FormControl, useToast } from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as yup from 'yup'
@@ -12,6 +12,7 @@ export default function ConfirmEmail() {
 
   const {navigate, goBack} = useNavigation();
   const [loading, setIsLoanding] = useState(false);
+  const toast = useToast()
 
   async function goToScreen() {
   navigate('SignUp');
@@ -23,6 +24,9 @@ export default function ConfirmEmail() {
       const response = await api.get('MailCheck', {
         email: values.email
       });
+      toast.show({
+        description: `Verifique seu E-mail`
+      })
       const confirmationCode = response.confirmationCode;
       await sendEmail(values.email, confirmationCode);
       setTimeout(() => {
@@ -30,7 +34,9 @@ export default function ConfirmEmail() {
         navigate('CodeConfirm');
       }, 2000);
     } catch (error) {
-      console.error('Erro ao realizar login:', error.message);
+      toast.show({
+        description: `${error.message}`
+      })
       setIsLoanding(false);
     }
   };
