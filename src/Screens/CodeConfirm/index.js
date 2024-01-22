@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { Input, Box, Text, Button,Link, Spinner} from "native-base";
+import { Input, Box, Text, Button,Link, Spinner, useToast} from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import styleCodeConfirm from "./styles";
 import api from "../../Services/api";
@@ -9,6 +9,7 @@ export default function ConfirmEmail() {
 
   const {navigate, goBack} = useNavigation();
   const [loading, setIsLoanding] = useState(false);
+  const toast = useToast()
 
   const data = []
 
@@ -19,11 +20,17 @@ export default function ConfirmEmail() {
       await api.post('/mailcheck',{
        token
       });
+      toast.show({
+        description: `Codigo confirmado`
+      })
       setTimeout(( )=>{
       setIsLoanding(false);
       navigate('HomePage');
     },2000)
     } catch (error) {
+      toast.show({
+        description: `${error.message}`
+      })
       setIsLoanding(false);  
     }
   };
