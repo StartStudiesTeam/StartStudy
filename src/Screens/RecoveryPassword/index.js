@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Input, Box, Text, Button,Link, Spinner,Pressable,FormControl} from "native-base";
+import { Input, Box, Text, Button,Link, Spinner,Pressable,FormControl , useToast} from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from "formik";
 import * as yup from 'yup'
@@ -13,16 +13,35 @@ export default function ConfirmEmail() {
   const {navigate, goBack} = useNavigation();
   const [loading, setIsLoanding] = useState(false);
   const [isPassword, setIsPassword] = useState(true)
+  const toast = useToast()
 
   
   async function goToSignIn() {
   navigate('SignIn');
   }
 
+  const handleSubmit = async (values) => {
+    try {
+      setIsLoanding(true)
+      const response = await api.post('/forgetpassword', {
+        newPassword: values.newPassword
+      })
+      setTimeout(( )=>{
+        navigate('SignIn');
+        setIsLoanding(false);
+      },2000)
+    } catch (error) {
+      toast.show({
+        description: `${error.message}`
+      })
+      setIsLoanding(false)
+    }
+  }
   
   return (
     <Box style={styleRecoveryPassword.contarinerP}>
       <Formik
+          onSubmit={handleSubmit}
           initialValues={{newPassword: ''}}
           validationSchema={yup.object().shape({
             newPassword: yup
