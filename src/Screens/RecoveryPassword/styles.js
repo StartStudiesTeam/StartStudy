@@ -15,17 +15,12 @@ const styleRecoveryPassword = StyleSheet.create({
         justifyContent:"center",
     },
     container: {
-        backgroundColor:'#fff',
-        flexDirection:'row',
-        justifyContent: 'center',
         alignItems: 'center',
         gap: 9,
-        marginTop:8,
-        borderRadius:8,
       },
       input: {
         textAlign:"left",
-        maxWidth:348,
+        maxWidth:248,
         maxHeight:48,
         fontFamily: "Ubuntu",
         fontSize: 16,
@@ -35,17 +30,7 @@ const styleRecoveryPassword = StyleSheet.create({
         borderRadius:8,
       },
       labelInput: {
-        marginBottom:8,
-        color: "#FFF",
-        transform: [{ translateY: 6 }],
-        fontFamily: "Ubuntu",
-        fontSize: 16,
-        fontStyle: "normal",
-        fontWeight: 300,
-        lineHeight: 16,
-        letterSpacing: 0.5,
-        alignSelf: "stretch",
-       
+        alignSelf: "stretch",      
       },
       linkSignIn: {
         marginTop:12,
