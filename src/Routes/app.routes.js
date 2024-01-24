@@ -12,7 +12,7 @@ const AppStack = createNativeStackNavigator();
 
 function AppRoutes() {
   return (
-    <AppStack.Navigator initialRouteName="SignIn">
+    <AppStack.Navigator initialRouteName="CodeConfirm">
       <AppStack.Screen
         name="ConfirmEmail"
         component={ConfirmEmail}

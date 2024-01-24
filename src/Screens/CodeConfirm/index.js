@@ -1,9 +1,9 @@
 import React, {useRef, useState} from 'react';
+import { Image } from 'react-native';
 import { Input, Box, Text, Button,Link, Spinner, useToast} from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import styleCodeConfirm from "./styles";
 import api from "../../Services/api";
-
 
 export default function ConfirmEmail() {
 
@@ -48,7 +48,6 @@ export default function ConfirmEmail() {
       style={styleCodeConfirm.input}
       variant="filled"
       placeholder="|"
-      // type='password'
       keyboardType='default'
       maxLength={1}
       autoFocus={index === 0}
@@ -59,83 +58,34 @@ export default function ConfirmEmail() {
 
   return (
     <Box style={styleCodeConfirm.contarinerP}> 
-      <Box style={styleCodeConfirm.boxImage}></Box>
+      
+      <Image source={require('../../Assets/BrandTest2.png')}
+      style={{width:89, resizeMode:'contain'}}/>
 
-    <Box style={{marginLeft:16,marginRight:16}}>
+      <Box style={{marginLeft:16,marginRight:16}}>
+
+      <Box style={styleCodeConfirm.boxTexts}>
+   
+        <Text style={styleCodeConfirm.labelInit}>Você é você mesmo?!</Text>
+        <Text style={styleCodeConfirm.labelText}>
+        Precisamos confirmar se você recebeu{'\n'} 
+        o código no seu e-mail informado!
+        </Text>
+     
+      </Box>
+
+
+
       <Text style={styleCodeConfirm.labelInput}>Code</Text>
   
       <Box style={styleCodeConfirm.container}>
 
       <>{inputComponents}</>
-        {/* <Input
-          
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 0}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-       <Input
 
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 1}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-       <Input
+      </Box>
 
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          maxLength={1}
-          keyboardType='numeric'
-          autoFocus={index === 2}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-       <Input
-
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 3}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-        <Input
-
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 4}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-       <Input
-
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 5}
-          onChangeText={(text)=>setInputValue(index,text)}
-        /> */}
-    </Box>
-        <Link style={styleCodeConfirm.linkSignIn} onPress={() => goToSignUp()}> 
-        Don't have an account? Register!</Link>
+      <Link style={styleCodeConfirm.linkSignIn} onPress={() => goToSignUp()}> 
+        Don't have an account? signup?</Link>
       </Box>
 
       <Box style={styleCodeConfirm.boxBotao}>
