@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Input, Box, Text, Button,Link, Spinner,Pressable,FormControl , useToast} from "native-base";
+import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from "formik";
 import * as yup from 'yup'
@@ -40,6 +41,7 @@ export default function ConfirmEmail() {
   
   return (
     <Box style={styleRecoveryPassword.contarinerP}>
+
       <Formik
           onSubmit={handleSubmit}
           initialValues={{newPassword: ''}}
@@ -52,10 +54,22 @@ export default function ConfirmEmail() {
       >
         {({ handleChange, handleSubmit, setFieldTouched, touched, isValid, errors, values }) =>(
           <Box style={styleRecoveryPassword.contarinerP}>
-            <Box style={styleRecoveryPassword.boxImage}></Box>
+            <Image source={require('../../Assets/BrandTest2.png')}
+            style={{width:89, resizeMode:'contain',position:'relative'}}/>
             <Box >
+
+          <Box style={styleRecoveryPassword.boxTexts}>
+   
+          <Text style={styleRecoveryPassword.textPrincipal}>Renove sua segurança!</Text>
+          <Text style={styleRecoveryPassword.textSecundario}>
+            Cadastre uma nova senha, e tenha{'\n'} 
+            acesso a todo recurso novamente!
+          </Text>
+     
+          </Box>
+
               <FormControl isInvalid={!isValid} style={styleRecoveryPassword.container}>
-                <FormControl.Label style={styleRecoveryPassword.labelInput}>New Password</FormControl.Label>
+                <Text style={styleRecoveryPassword.titleInput}>New Password</Text>
                 <Input
                   style={styleRecoveryPassword.input}
                   value={values.newPassword}
@@ -70,7 +84,7 @@ export default function ConfirmEmail() {
                   InputLeftElement={<Icon style={{marginLeft:17}}name="lock" size={20} color="#ccc"/>}
                   InputRightElement={
                   <Pressable onPress={() => setIsPassword(!isPassword)}>
-                    <Icon name={isPassword ? "eye" : "eye-slash"} size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />
+                    <Icon name={isPassword ? "eye" : "eye-slash"} size={20} color="#ccc" style={{marginLeft: 12, marginRight: 12 }} />
                   </Pressable>} />
                   {touched.newPassword && errors.newPassword && 
                     <FormControl.ErrorMessage>
@@ -78,6 +92,7 @@ export default function ConfirmEmail() {
                     </FormControl.ErrorMessage>
                   }
               </FormControl>
+
               <Link
               style={styleRecoveryPassword.linkSignIn}
               onPress={() => goToSignIn()}>
@@ -86,11 +101,12 @@ export default function ConfirmEmail() {
             </Box>
             <Box style={styleRecoveryPassword.boxBotao}>
               <Button
+              style={styleRecoveryPassword.button}
               onPress={() => handleSubmit()}>
               {loading ? (
                 <Spinner color={'cyan.500'} />
               ) : (
-                <Text>Save</Text>
+                <Text style={styleRecoveryPassword.textBotao}>SAVE</Text>
               )}
               </Button>
             </Box>
