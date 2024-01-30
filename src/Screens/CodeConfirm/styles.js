@@ -73,10 +73,9 @@ const styleCodeConfirm = StyleSheet.create({
         
       },
       linkSignIn: {
-        color: '#0067A6',
-        fontFamily: "Ubuntu",
+        color: '#0B2C37',
+        fontFamily: 'Ubuntu_700Bold',
         fontSize: 12,
-        fontStyle: "normal",
         fontWeight: 400,
         letterSpacing: 0.5,
         alignSelf: "stretch",
@@ -99,7 +98,7 @@ const styleCodeConfirm = StyleSheet.create({
         height: 36,
         color:'#0B2C37',
         textAlign: 'center',
-        fontFamily: 'Ubuntu',
+        fontFamily: 'Ubuntu_500Medium',
         fontSize: 14,
         fontStyle: 'normal',
         fontWeight: 500,
