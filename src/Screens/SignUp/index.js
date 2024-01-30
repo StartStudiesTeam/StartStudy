@@ -44,7 +44,12 @@ export default function SignUp() {
     }
 
   return (
-    <Box flex={1} bg="#B6B1B1" alignItems="center" justifyContent="center">
+    <Box flex={1} bg="#2B85A2" alignItems="center" justifyContent="center">
+      <Box style={styleSignUp.titleSignUp}>
+        <Text style={styleSignUp.titleOne}>Vamos começar?</Text>
+        <Text style={styleSignUp.subTitle}>Precisamos de alguns dados para continuar e acessar todos recursos!</Text>
+      </Box>
+
       <Formik
         initialValues={{ name: '', nick_name: '', email: '', phone_number: '', password: '' }}
         onSubmit={handleSubmit}
@@ -54,9 +59,9 @@ export default function SignUp() {
             .required('The name is mandatory'),
           nick_name: yup
             .string()
-            .required('nick_name is required')
-            .min(3, 'nick_name must have at least 3 characters')
-            .max(16, 'nick_name must have a maximum of 16 characters'),
+            .required('Nick name is required')
+            .min(3, 'Nick name must have at least 3 characters')
+            .max(16, 'Nick name must have a maximum of 16 characters'),
           email: yup
             .string()
             .email('Invalid email address format')
@@ -76,7 +81,7 @@ export default function SignUp() {
           <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styleSignUp.scrollContainer}>
             <Box style={styleSignUp.container}>
               <FormControl isInvalid={touched.name && !isValid}>
-                <FormControl.Label>Name</FormControl.Label>
+                <FormControl.Label><Text style={styleSignUp.labelInput}>Name</Text></FormControl.Label>
                 <Input
                   value={values.name}
                   onChangeText={(text) => {
@@ -85,8 +90,9 @@ export default function SignUp() {
                   }}
                   onBlur={() => setFieldTouched('name')}
                   backgroundColor="#fff"
+                  borderRadius={8}
                   placeholder="Type your name"
-                  InputLeftElement={<Icon name="user" size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />}
+                  InputLeftElement={<Icon name="user-o" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
                   style={styleSignUp.input} />
                 {touched.name && errors.name &&
                   <FormControl.ErrorMessage>
@@ -96,7 +102,7 @@ export default function SignUp() {
               </FormControl>
 
               <FormControl isInvalid={touched.nick_name && !isValid}>
-                <FormControl.Label>Nick Name</FormControl.Label>
+              <FormControl.Label><Text style={styleSignUp.labelInput}>Nick Name</Text></FormControl.Label>
                 <Input
                   onChangeText={(text) => {
                     handleChange('nick_name')(text);
@@ -105,28 +111,30 @@ export default function SignUp() {
                   value={values.nick_name}
                   onBlur={() => setFieldTouched('nick_name')}
                   backgroundColor="#fff"
+                  borderRadius={8}
                   placeholder="Create a nickname"
-                  InputLeftElement={<Icon name="user-circle" size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />}
+                  InputLeftElement={<Icon name="at" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
                   style={styleSignUp.input} />
-                {touched.nickName && errors.nickName &&
+                {touched.nick_name && errors.nick_name &&
                   <FormControl.ErrorMessage>
-                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.nickName}</Text>
+                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.nick_name}</Text>
                   </FormControl.ErrorMessage>
                 }
               </FormControl>
 
               <FormControl isInvalid={touched.email && !isValid}>
-                <FormControl.Label>Email</FormControl.Label>
+              <FormControl.Label><Text style={styleSignUp.labelInput}>Email</Text></FormControl.Label>
                 <Input
                   value={values.email}
                   onChangeText={(text) => {
-                    handleChange('email')(text)
+                    handleChange('email')(text.toLowerCase())
                     setFieldTouched('email', true)
                   }}
                   onBlur={() => setFieldTouched('email')}
                   backgroundColor="#fff"
+                  borderRadius={8}
                   placeholder="Type your email"
-                  InputLeftElement={<Icon name="at" size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />}
+                  InputLeftElement={<Icon name="envelope-o" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
                   style={styleSignUp.input} />
                 {touched.email && errors.email &&
                   <FormControl.ErrorMessage>
@@ -136,7 +144,7 @@ export default function SignUp() {
               </FormControl>
 
               <FormControl isInvalid={touched.phone_number && !isValid}>
-                <FormControl.Label>Phone number</FormControl.Label>
+              <FormControl.Label><Text style={styleSignUp.labelInput}>Phone number</Text></FormControl.Label>
                 <Input
                   onChangeText={(text) => {
                     handleChange('phone_number')(text.replace(/\D/g, '').slice(0, 11))
@@ -145,8 +153,9 @@ export default function SignUp() {
                   value={values.phone_number}
                   onBlur={() => setFieldTouched('phone_number')}
                   backgroundColor="#fff"
+                  borderRadius={8}
                   placeholder="Typer your phone number"
-                  InputLeftElement={<Icon name="phone" size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />}
+                  InputLeftElement={<Icon name="phone" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
                   style={styleSignUp.input} />
                 {touched.phone && errors.phone &&
                   <FormControl.ErrorMessage>
@@ -156,7 +165,7 @@ export default function SignUp() {
               </FormControl>
 
               <FormControl isInvalid={touched.password && !isValid}>
-                <FormControl.Label>Password</FormControl.Label>
+              <FormControl.Label><Text style={styleSignUp.labelInput}>Password</Text></FormControl.Label>
                 <Input
                   onChangeText={(text) => {
                     handleChange('password')(text)
@@ -165,13 +174,14 @@ export default function SignUp() {
                   value={values.password}
                   onBlur={() => setFieldTouched('password')}
                   backgroundColor="#fff"
+                  borderRadius={8}
                   placeholder="Create your security password"
-                  InputLeftElement={<Icon name="lock" size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />}
+                  InputLeftElement={<Icon name="lock" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
                   style={styleSignUp.input}
                   secureTextEntry={isPassword}
                   InputRightElement={
                     <Pressable onPress={() => setIsPassword(!isPassword)}>
-                      <Icon name={isPassword ? "eye" : "eye-slash"} size={20} color="#ccc" style={{ marginLeft: 12, marginRight: 12 }} />
+                      <Icon name={isPassword ? "eye" : "eye-slash"} size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />
                     </Pressable>} />
                 {touched.password && errors.password &&
                   <FormControl.ErrorMessage>
@@ -191,7 +201,7 @@ export default function SignUp() {
               >{loading ? (
                 <Spinner color={'cyan.500'} />
               ) : (
-                <Text>SIGN UP</Text>
+                <Text style={styleSignUp.textButton}>SIGN UP</Text>
               )}</Button>
             </Box>
           </ScrollView>
