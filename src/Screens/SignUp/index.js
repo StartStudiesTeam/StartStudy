@@ -47,7 +47,7 @@ export default function SignUp() {
     <Box flex={1} bg="#2B85A2" alignItems="center" justifyContent="center">
       <Box style={styleSignUp.titleSignUp}>
         <Text style={styleSignUp.titleOne}>Vamos começar?</Text>
-        <Text style={styleSignUp.subTitle}>Precisamos de alguns dados para continuar e acessar todos recursos!</Text>
+        <Text style={styleSignUp.subTitle}>Precisamos de alguns dados para{'\n'}continuar e acessar todos recursos!</Text>
       </Box>
 
       <Formik
