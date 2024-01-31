@@ -26,7 +26,7 @@ export default function ConfirmEmail() {
     navigate("SignUp");
   }
 
-  const submitCode2 = async (values) => {
+  const submitCode = async (values) => {
     try {
       setIsLoanding(true);
       const response = await api.get("MailCheck", {
@@ -61,7 +61,7 @@ export default function ConfirmEmail() {
       <Box style={styleConfirmEmail.container}>
         <Formik
           initialValues={{ email: "" }}
-          onSubmit={submitCode2}
+          onSubmit={submitCode}
           validationSchema={yup.object().shape({
             email: yup.string(),
           })}
@@ -107,7 +107,7 @@ export default function ConfirmEmail() {
       </Box>
 
       <Box style={styleConfirmEmail.botao}>
-        <Button onPress={() => submitCode2()} style={styleConfirmEmail.button}>
+        <Button onPress={() => submitCode()} style={styleConfirmEmail.button}>
           {loading ? (
             <Spinner color={"cyan.500"} />
           ) : (
