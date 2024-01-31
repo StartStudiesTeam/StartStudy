@@ -84,8 +84,9 @@ export default function ConfirmEmail() {
 
       </Box>
 
-      <Link style={styleCodeConfirm.linkSignIn} onPress={() => goToSignUp()}> 
-        Don't have an account? signup?</Link>
+      <Link  onPress={() => goToSignUp()}> 
+        <Text style={styleCodeConfirm.linkSignIn}>Don't have an account? signup?</Text>
+      </Link>
       </Box>
 
       <Box style={styleCodeConfirm.boxBotao}>

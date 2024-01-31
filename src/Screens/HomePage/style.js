@@ -19,7 +19,6 @@ const styleHomePage = StyleSheet.create({
   },
   titleStartStudy: {
     display: 'flex',
-    fontFamily:'Ubuntu_700Bold',
   },
   titleAbout: {
     textAlign: 'center',
@@ -28,13 +27,14 @@ const styleHomePage = StyleSheet.create({
     transform: [{translateY: -50}],
   },
   titleAboutOne: {
+    padding: 1,
     fontSize: 12,
     color: '#0B2C37',
-    fontFamily: 'Ubuntu_400Regular_Italic',
+    fontFamily: 'Ubuntu_300Light_Italic',
   },
   titleAboutSecond: {
     color: '#0B2C37',
-    fontSize: 17,
+    fontSize: 14,
     textTransform: 'uppercase',
     fontFamily: 'Ubuntu_400Regular_Italic',
   },
@@ -87,12 +87,13 @@ const styleHomePage = StyleSheet.create({
     textAlign: 'center',
   },
   textTopic: {
+    fontSize: 12,
     justifyContent: 'center',
     textAlign: "center",
-    fontFamily: 'Ubuntu_400Regular',
+    fontFamily: 'Ubuntu_300Light',
   },
   containerTrail: {
-    margin: 50,
+    margin: 30,
     alignItems: "center",
   },
   cardtrail: {
@@ -116,7 +117,7 @@ const styleHomePage = StyleSheet.create({
   },
   nameTrail: {
     color: '#0B2C37BF',
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: 'Ubuntu_400Regular',
   },
   userTrack: {
@@ -132,7 +133,7 @@ const styleHomePage = StyleSheet.create({
   },
   nameUser: {
     marginLeft: 5,
-    fontSize: 14,
+    fontSize: 12,
     color: '#595959',
     fontFamily: 'Ubuntu_400Regular',
   },
@@ -158,7 +159,7 @@ const styleHomePage = StyleSheet.create({
     left: 125,
     fontSize: 15,
     color: '#264F75',
-    fontFamily: 'Ubuntu_400Regular',
+    fontFamily: 'Ubuntu_300Light',
   },
   iconFIleAbout: {
     left: 300,
@@ -186,7 +187,7 @@ const styleHomePage = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 8,
     marginRight: 20,
-    opacity: 0.3,
+    opacity: 0.2,
     borderWidth: 1,
     borderColor: "#549DB4",
   },
@@ -214,8 +215,8 @@ const styleHomePage = StyleSheet.create({
   },
   textbuttonPlayTrack: {
     color: '#3D5872',
-    fontSize: 15,
-    fontFamily: 'Ubuntu_400Regular',
+    fontSize: 12,
+    fontFamily: 'Ubuntu_500Medium',
   },   
   buttonOptions: {
     display: 'none',

@@ -12,7 +12,7 @@ const styleSignUp = StyleSheet.create({
     backgroundColor: "#fff",
     color: '#00000080',
     maxWidth: 400,
-    fontFamily: 'Ubuntu_400Regular',
+    fontFamily: 'Ubuntu_300Light',
     fontSize: 16,
     fontStyle: "normal",
     lineHeight: 24,
@@ -20,7 +20,7 @@ const styleSignUp = StyleSheet.create({
   },
   labelInput: {
     color: "#FFF",
-    fontFamily: 'Ubuntu_400Regular',
+    fontFamily: 'Ubuntu_500Medium',
     fontSize: 16,
     fontWeight: 300,
     lineHeight: 16,
@@ -31,7 +31,7 @@ const styleSignUp = StyleSheet.create({
     width: 200,
     color: '#0B2C37',
     fontSize: 12,
-    fontFamily: 'Ubuntu_400Regular',
+    fontFamily: 'Ubuntu_700Bold',
     fontWeight: 400,
     letterSpacing: 0.5,
     alignSelf: "stretch",
@@ -44,7 +44,9 @@ const styleSignUp = StyleSheet.create({
     marginLeft: 138,
   },
   textButton: {
-    fontFamily: 'Ubuntu_400Regular',
+    fontSize: 14,
+    color: '#0B2C37',
+    fontFamily: 'Ubuntu_500Medium',
   },
   scrollContainer: {
     width: 360,
@@ -69,13 +71,15 @@ const styleSignUp = StyleSheet.create({
   },
   titleOne: {
     color: '#F3B852',
-    fontFamily: 'Ubuntu_400Regular',
-    fontSize: 24,
+    fontFamily: 'Ubuntu_500Medium',
+    fontSize: 26,
+    padding: 3,
+    marginLeft: -4,
   },
   subTitle: {
     color: '#F0E3C9',
-    fontFamily: 'Ubuntu_400Regular',
-    fontSize: 16,
+    fontFamily: 'Ubuntu_300Light',
+    fontSize: 18,
   },
 
 });
