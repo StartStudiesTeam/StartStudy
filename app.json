@@ -1,10 +1,43 @@
 {
   "expo": {
-    "name": "startstudy-app",
-    "slug": "startstudy-app",
+    "name": "StartStudies App",
+    "slug": "startstudies-app",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
+  },
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@components/*": [
+        "./src/Components/*"
+      ],
+      "@screens/*": [
+        "./src/Screens/*"
+      ],
+      "@services/*": [
+        "./src/Services/*"
+      ],
+      "@utils/*": [
+        "./src/Utils/*"
+      ],
+      "@constants/*": [
+        "./src/Constants/*"
+      ],
+      "@theme/*": [
+        "./src/Theme/*"
+      ],
+      "@api/*": [
+        "./src/Services/api/*"
+      ]
+    }
   }
 }
