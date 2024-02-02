@@ -10,7 +10,7 @@ const styleCodeConfirm = StyleSheet.create({
         flex:1,
         width:windowWidth,
         height:windowHeight,
-        backgroundColor:"#B6B1B1",
+        backgroundColor:"#2B85A2",
         alignItems:"center",
         justifyContent:"center",
     },
@@ -21,18 +21,21 @@ const styleCodeConfirm = StyleSheet.create({
         gap: 9,
         marginBottom:12,
         marginTop:8,
+       
       },
       input: {
         backgroundColor:'#FFF',
         textAlign:"center",
         maxWidth:48,
         maxHeight:48,
+        padding:12,
         fontFamily: "Ubuntu",
         fontSize: 16,
         fontStyle: "normal",
         lineHeight: 24,
         letterSpacing: 0.5,
         borderRadius:8,
+        
       },
       labelInput: {
         marginBottom:8,
@@ -44,14 +47,35 @@ const styleCodeConfirm = StyleSheet.create({
         fontWeight: 300,
         lineHeight: 16,
         letterSpacing: 0.5,
+      },
+        labelText: {
+        marginBottom:8,
+        color: "#FFF",
+        transform: [{ translateY: 6 }],
+        fontFamily: "Ubuntu_300Light",
+        fontSize: 16,
+        fontStyle: "normal",
+        fontWeight: 300,
+        lineHeight: 16,
+        letterSpacing: 0.5,
+      },
+      labelInit: {
+        marginBottom:8,
+        color: "#F3B852",
+        transform: [{ translateY: 6 }],
+        fontFamily: "Ubuntu_500Medium",
+        fontSize: 24,
+        fontStyle: "normal",
+        fontWeight: 500,
+        lineHeight: 24,
+        letterSpacing: 0.5,
         alignSelf: "stretch",
-       
+        
       },
       linkSignIn: {
-        color: '#0067A6',
-        fontFamily: "Ubuntu",
+        color: '#0B2C37',
+        fontFamily: 'Ubuntu_700Bold',
         fontSize: 12,
-        fontStyle: "normal",
         fontWeight: 400,
         letterSpacing: 0.5,
         alignSelf: "stretch",
@@ -65,29 +89,32 @@ const styleCodeConfirm = StyleSheet.create({
       },
       button: {
         justifyContent:'center',
-        backgroundColor:'#1976D2',
+        backgroundColor:'#EBC95D',
         width: 89,
         height:36,
       },
       textBotao:{
-      alignItems:'center',
-      height: 36,
-      color:'#FFF',
-      textAlign: 'center',
-      fontFamily: 'Ubuntu',
-      fontSize: 14,
-      fontStyle: 'normal',
-      fontWeight: 500,
-      lineHeight: 36,
-      letterSpacing: 1.25,
-      
-  },
+        alignItems:'center',
+        height: 36,
+        color:'#0B2C37',
+        textAlign: 'center',
+        fontFamily: 'Ubuntu_500Medium',
+        fontSize: 14,
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: 36,
+        letterSpacing: 1.25,   
+      },
       boxImage:{
         width:120,
         height:120,
         backgroundColor:'#D9D9D9',
-        marginBottom:64,
-        borderRadius:16
+        borderRadius:16,
       },
+      boxTexts:{
+        marginBottom:56,
+        marginTop: 64,
+      }
+      
 });
 export default styleCodeConfirm;

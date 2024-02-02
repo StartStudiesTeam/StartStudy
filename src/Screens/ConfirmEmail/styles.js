@@ -1,17 +1,37 @@
 import { StyleSheet } from "react-native";
-import {Dimensions} from 'react-native';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-const styleTeste = StyleSheet.create({
-  containerP: {
-    flex:1,
-    width:windowWidth,
-    height:windowHeight,
-    backgroundColor:"#B6B1B1",
-    alignItems:"center",
-    justifyContent:"center",
+const styleConfirmEmail = StyleSheet.create({
+  containerLogo: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 89,
+    height: 101,
+    gap: 4,
+  },
+  containerTitle: {
+    padding: 10,
+    marginTop: 60,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    alignSelf: 'stretch',
+    letterSpacing: 0.5,
+    gap: 12,
+  },
+  titleOne: {
+    fontFamily:'Ubuntu_500Medium',
+    fontSize: 26,
+    padding: 4,
+    marginLeft: -5,
+    color: '#F3B852',
+  },
+  titleTwo: {
+    fontFamily:'Ubuntu_300Light',
+    fontSize: 18,
+    color: '#F0E3C9',
   },
   container: {
     display: 'flex',
@@ -21,53 +41,48 @@ const styleTeste = StyleSheet.create({
     gap: 9,
   },
   formControl: {
-    backgroundColor:'#fff',
     display: "flex",
-    width: 328,
-    justifyContent: "center",
-    alignItems: "center",
     borderRadius: 8,
+    marginTop: 30,
   },
   input: {
-    backgroundColor: "#fff",
-    fontFamily: "Ubuntu",
+    color: '#00000080',
+    fontFamily:'Ubuntu_300Light',
     fontSize: 16,
     fontStyle: "normal",
     letterSpacing: 0.5,
     borderRadius:8,
   },
   labelInput: {
-    marginBottom:8,
+    marginLeft: 4,
     color: "#FFF",
-    transform: [{ translateY: 6 }],
-    fontFamily: "Ubuntu",
+    fontFamily:'Ubuntu_500Medium',
     fontSize: 16,
-    fontStyle: "normal",
     fontWeight: 300,
     lineHeight: 16,
     letterSpacing: 0.5,
     alignSelf: "stretch",
   },
   linkSignIn: {
-    fontFamily: "Ubuntu",
-    fontSize: 14,
-    fontStyle: "normal",
     fontWeight: 400,
     letterSpacing: 0.5,
     alignSelf: "stretch",
   },
+  textLink: {
+  fontFamily: 'Ubuntu_700Bold',
+  color: '#0B2C37',
+  fontSize: 12,
+  marginLeft: 2,
+  },
   button: {
-    backgroundColor:'#1976D2',
+    backgroundColor:'#EBC95D',
     width: 90,
     marginTop: 56,
   },
-  boxImage:{
-    width:120,
-    height:120,
-    backgroundColor:'#D9D9D9',
-    marginBottom:64,
-    borderRadius:16
+  textButton: {
+    color: '#0B2C37',
+    fontFamily: 'Ubuntu_500Medium',
   },
   
 });
-export default styleTeste;
+export default styleConfirmEmail;

@@ -1,3 +1,10 @@
+if (__DEV__) {
+    import('./src/config/reactotron').then(() =>
+      console.log('Reactotron Configured'),
+    );
+  }
+  
+
 import { registerRootComponent } from 'expo';
 
 import App from './App';

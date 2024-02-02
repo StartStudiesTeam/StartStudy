@@ -1,42 +1,37 @@
 import React, {useRef, useState} from 'react';
-import { Input, Box, Text, Button,Link, Spinner} from "native-base";
+import { Image } from 'react-native';
+import { Input, Box, Text, Button,Link, Spinner, useToast} from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import styleCodeConfirm from "./styles";
 import api from "../../Services/api";
-
 
 export default function ConfirmEmail() {
 
   const {navigate, goBack} = useNavigation();
   const [loading, setIsLoanding] = useState(false);
+  const toast = useToast()
 
-  const [inputValues, setInputValue] = useState(["", "", "", "", "", ""]);
+  const data = []
 
   const submitCode = async () => {
     try {
       setIsLoanding(true)
-      const response = await api.get('CodeConfirm', {
-        token
+      const token = data.join('')
+      await api.post('/mailcheck',{
+       token
       });
-      console.log('Resposta da API:', response);
-
-      const apiToken = response.token;
-      for (let index = 0; index < apiToken.length; index++) {
-        const currentChar = apiToken.charAt(index);
-        setInputValue((prevInputValues) => {
-          const newInputValues = [...prevInputValues];
-          newInputValues[index] = currentChar;
-          return newInputValues;
-        });
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
+      toast.show({
+        description: `Codigo confirmado`
+      })
       setTimeout(( )=>{
-        setIsLoanding(false);
-        navigate('HomePage');
-      },2000)
-    } catch (error) {
-      console.error('Erro ao realizar login:', error.message);
       setIsLoanding(false);
+      navigate('HomePage');
+    },2000)
+    } catch (error) {
+      toast.show({
+        description: `${error.message}`
+      })
+      setIsLoanding(false);  
     }
   };
 
@@ -44,103 +39,54 @@ export default function ConfirmEmail() {
   navigate('SignUp');
   }
 
+  
   let inputComponents = [];
-  for (let index = 0; index < inputValues.length; index++) {
+  for (let index = 0; index <= 5; index++) {
   inputComponents.push(
     <Input
       key={index}
       style={styleCodeConfirm.input}
       variant="filled"
       placeholder="|"
-      type='password'
       keyboardType='default'
       maxLength={1}
       autoFocus={index === 0}
-      value={inputValues[index[0]]}
-      onChangeText={(text) =>  {console.log(text);}}
+      onChangeText={(text) =>  {data[index] = text}}
     />
   );
 }
 
   return (
     <Box style={styleCodeConfirm.contarinerP}> 
-      <Box style={styleCodeConfirm.boxImage}></Box>
+      
+      <Image source={require('../../Assets/BrandTest2.png')}
+      style={{width:89, resizeMode:'contain'}}/>
 
-    <Box style={{marginLeft:16,marginRight:16}}>
+      <Box style={{marginLeft:16,marginRight:16}}>
+
+      <Box style={styleCodeConfirm.boxTexts}>
+   
+        <Text style={styleCodeConfirm.labelInit}>Você é você mesmo?!</Text>
+        <Text style={styleCodeConfirm.labelText}>
+        Precisamos confirmar se você recebeu{'\n'} 
+        o código no seu e-mail informado!
+        </Text>
+     
+      </Box>
+
+
+
       <Text style={styleCodeConfirm.labelInput}>Code</Text>
   
       <Box style={styleCodeConfirm.container}>
 
       <>{inputComponents}</>
-        {/* <Input
-          
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 0}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-       <Input
 
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 1}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-       <Input
+      </Box>
 
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          maxLength={1}
-          keyboardType='numeric'
-          autoFocus={index === 2}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-       <Input
-
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 3}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-        <Input
-
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 4}
-          onChangeText={(text)=>setInputValue(index,text)}
-        />
-       <Input
-
-          style={styleCodeConfirm.input}
-          variant="filled"
-          placeholder="|"
-          type='password'
-          keyboardType='numeric'
-          maxLength={1}
-          autoFocus={index === 5}
-          onChangeText={(text)=>setInputValue(index,text)}
-        /> */}
-    </Box>
-        <Link style={styleCodeConfirm.linkSignIn} onPress={() => goToSignUp()}> 
-        Don't have an account? Register!</Link>
+      <Link  onPress={() => goToSignUp()}> 
+        <Text style={styleCodeConfirm.linkSignIn}>Don't have an account? signup?</Text>
+      </Link>
       </Box>
 
       <Box style={styleCodeConfirm.boxBotao}>
