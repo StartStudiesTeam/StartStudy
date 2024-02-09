@@ -1,13 +1,13 @@
 import { Box, Text, Image } from 'native-base';
 import styles from './style';
 
-export default function HeaderCard() {
+export default function HeaderCard(props) {
 
     const data = {
-        title: "Title Track Here",
+        title: props.title,
         profile: {
-            nick: "nick_name_here",
-            photo: "https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small_2x/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg"
+            nick: props.profile.nick,
+            photo: props.photoProfile
         }
     }
 
