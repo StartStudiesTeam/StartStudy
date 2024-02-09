@@ -4,12 +4,11 @@ export const TrackPreviewStore = create((set) => ({
     body: [
         {
             titleTrack: 'My Track 1',
-            userProfile: [
-                {
-                    nick: 'nick_name_here1',
-                    photoProfile: 'link_photo1'
-                }
-            ],
+            userProfile: {
+                nick: 'nick_name_here1',
+                photoProfile: 'link_photo1'
+            }
+            ,
             itemsTrack: [
                 {
                     title: 'Item 1',
@@ -22,17 +21,15 @@ export const TrackPreviewStore = create((set) => ({
                     imageBackground: 'https://img.freepik.com/fotos-gratis/respingo-colorido-abstrato-3d-background-generativo-ai-background_60438-2509.jpg'
                 }
             ],
-            note: 'Texto ginormico aqui 1',
-            titleNote: 'My Note 1'
+            newNoteItem: 'Texto ginormico aqui 1',
+            newTitleNote: 'My Note 1'
         },
         {
             titleTrack: 'My Track 2',
-            userProfile: [
-                {
-                    nick: 'nick_name_here2',
-                    photoProfile: 'link_photo2'
-                }
-            ],
+            userProfile: {
+                nick: 'nick_name_here2',
+                photoProfile: 'link_photo2'
+            },
             itemsTrack: [
                 {
                     title: 'Item 2',
