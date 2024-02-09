@@ -5,74 +5,26 @@ import { TouchableOpacity } from 'react-native';
 import { useState } from "react";
 import { ScrollView } from 'native-base';
 
-export default function Note() {
+export default function Note(props) {
 
     const [showModal, setShowModal] = useState(false);
 
     const data = {
-        title: "Coliseu",
+        title: props.titleNote,
         note: (
             <>
                 <Text style={styles.note} numberOfLines={4} ellipsizeMode="tail">
-                    * Cretense e Micênicos A construção começou sob o governo de Fernando Henrique Costa.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                    * A construção de Cretense e Micênicos foi concluída em 2013
+                    {props.note}
                 </Text>
 
                 <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
                     <Modal.Content style={styles.modalContent}>
                         <Modal.CloseButton />
-                        <Modal.Header>Colliseu</Modal.Header>
+                        <Modal.Header>{props.titleNote}</Modal.Header>
                         <Modal.Body>
                             <ScrollView>
                                 <Text style={styles.note} >
-                                    * Cretense e Micênicos A construção começou sob o governo de Fernando Henrique Costa.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013.
-                                    * A construção de Cretense e Micênicos foi concluída em 2013
+                                    {props.note}
                                 </Text>
                             </ScrollView>
                         </Modal.Body>
