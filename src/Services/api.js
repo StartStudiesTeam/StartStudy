@@ -1,4 +1,7 @@
-import  axios from 'axios';
+import axios from 'axios';
+import { AuthStore } from '../stores/Auth/store';
+
+const accessToken = AuthStore.getState().accessToken;
 
 const api = axios.create({
   baseURL: 'http://www.startstudies.com.br/api/v1',
@@ -6,6 +9,10 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+
     if (config.data instanceof FormData) {
       config.headers['Content-Type'] = 'multipart/form-data';
     }
