@@ -73,7 +73,7 @@ const styleSignUp = StyleSheet.create({
     color: '#F3B852',
     fontFamily: 'Ubuntu_500Medium',
     fontSize: 26,
-    padding: 3,
+    padding: 4,
     marginLeft: -4,
   },
   subTitle: {
