@@ -1,5 +1,15 @@
 {
   "expo": {
+    "splash": {
+      "image": "./assets/brands/BrandTest2.png",
+      "backgroundColor": "#FEF9B0",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
     "name": "StartStudies App",
     "slug": "startstudies-app",
     "version": "1.0.0",
