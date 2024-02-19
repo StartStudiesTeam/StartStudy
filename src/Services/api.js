@@ -1,10 +1,7 @@
 import axios from 'axios';
-import { AuthStore } from '../stores/Auth/store';
+import { GetStorage } from '../utils/AsyncStorage';
 
-async function getAccessToken() {
-  return AuthStore((state) => state.accessToken);
-}
-const accessToken = getAccessToken();
+const accessToken = GetStorage('accessToken');
 
 const api = axios.create({
   baseURL: 'http://www.startstudies.com.br/api/v1',
