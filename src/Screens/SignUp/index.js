@@ -1,212 +1,213 @@
 import React, { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { Input, Box, Text, Button, ScrollView, Link, Pressable, FormControl,Spinner, useToast } from "native-base";
+import { Input, Box, Text, Button, ScrollView, Pressable, FormControl, Spinner, useToast } from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import api from '../../Services/api'
-import * as yup from 'yup'
 import { Formik } from "formik";
+import { TouchableOpacity } from "react-native";
+import schemaValidation from './schemaValidation';
 import styleSignUp from "./style";
+import { AuthStore } from '../../stores/Auth/store';
+import { GetStorage } from "../../utils/AsyncStorage";
+
 
 export default function SignUp() {
-  const [isPassword, setIsPassword] = useState(true)
-  const { navigate, goBack } = useNavigation();
-  const [loading, setIsLoanding] = useState(false);
-  const toast = useToast()
+    const { signUp } = AuthStore();
 
-  const handleSubmit = async (values) => {
-    try {
-      setIsLoanding(true)
-      const response = await api.post('SignUp', {
-        name: values.name,
-        nick_name: values.nick_name,
-        email: values.email,
-        password: values.password,
-        phone_number: values.phone_number,
-      });
-      toast.show({
-        description: `Cadastrado com sucesso ${values.name}`
-      })
-      setTimeout(( )=>{
-        setIsLoanding(false);
-        navigate('CodeConfirm');
-      },2000)
-      return response; 
-    } catch (error) {
-      toast.show({
-        description: `${error.message}`
-      })
-      setIsLoanding(false);
-    }
-  };
+    const [isPassword, setIsPassword] = useState(true);
+    const [loading, setIsLoading] = useState(false);
+    const { navigate, goBack } = useNavigation();
+    const toast = useToast();
 
-  async function goToScreen() {
-    navigate('SignIn');
-    }
+    const handleSubmit = async (values) => {
+        try {
+            setIsLoading(true);
 
-  return (
-    <Box flex={1} bg="#2B85A2" alignItems="center" justifyContent="center">
-      <Box style={styleSignUp.titleSignUp}>
-        <Text style={styleSignUp.titleOne}>Vamos começar?</Text>
-        <Text style={styleSignUp.subTitle}>Precisamos de alguns dados para{'\n'}continuar e acessar todos recursos!</Text>
-      </Box>
+            const credentialName = values.name;
+            const credentialNickName = values.nick_name;
+            const credentialEmail = values.email;
+            const credentialPassword = values.password;
+            const credentialPhoneNumber = values.phone_number;
 
-      <Formik
-        initialValues={{ name: '', nick_name: '', email: '', phone_number: '', password: '' }}
-        onSubmit={handleSubmit}
-        validationSchema={yup.object().shape({
-          name: yup
-            .string()
-            .required('The name is mandatory'),
-          nick_name: yup
-            .string()
-            .required('Nick name is required')
-            .min(3, 'Nick name must have at least 3 characters')
-            .max(16, 'Nick name must have a maximum of 16 characters'),
-          email: yup
-            .string()
-            .email('Invalid email address format')
-            .required('Email is required'),
-          phone_number: yup
-            .string()
-            .min(11, 'The telephone number must have at least 11 digits')
-            .required('A phone number is required'),
-          password: yup
-            .string()
-            .min(8, 'Password should be at least 8 chars long.')
-            .required('Password is required'),
-        })}
-      >
-        {({ handleChange, handleSubmit, setFieldTouched, touched, isValid, errors, values }) => (
+            const response = await signUp({
+                name: credentialName,
+                nickName: credentialNickName,
+                email: credentialEmail,
+                password: credentialPassword,
+                numberPhone: credentialPhoneNumber
+            });
+            const accessToken = await GetStorage('accessToken');
 
-          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styleSignUp.scrollContainer}>
-            <Box style={styleSignUp.container}>
-              <FormControl isInvalid={touched.name && !isValid}>
-                <FormControl.Label><Text style={styleSignUp.labelInput}>Name</Text></FormControl.Label>
-                <Input
-                  value={values.name}
-                  onChangeText={(text) => {
-                    handleChange('name')(text.replace(/[^a-zA-Z ]/g, ''))
-                    setFieldTouched('name', true)
-                  }}
-                  onBlur={() => setFieldTouched('name')}
-                  backgroundColor="#fff"
-                  borderRadius={8}
-                  placeholder="Type your name"
-                  InputLeftElement={<Icon name="user-o" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
-                  style={styleSignUp.input} />
-                {touched.name && errors.name &&
-                  <FormControl.ErrorMessage>
-                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.name}</Text>
-                  </FormControl.ErrorMessage>
-                }
-              </FormControl>
+            toast.show({
+                description: `${response.message}`
+            });
 
-              <FormControl isInvalid={touched.nick_name && !isValid}>
-              <FormControl.Label><Text style={styleSignUp.labelInput}>Nick Name</Text></FormControl.Label>
-                <Input
-                  onChangeText={(text) => {
-                    handleChange('nick_name')(text);
-                    setFieldTouched('nick_name', true)
-                  }}
-                  value={values.nick_name}
-                  onBlur={() => setFieldTouched('nick_name')}
-                  backgroundColor="#fff"
-                  borderRadius={8}
-                  placeholder="Create a nickname"
-                  InputLeftElement={<Icon name="at" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
-                  style={styleSignUp.input} />
-                {touched.nick_name && errors.nick_name &&
-                  <FormControl.ErrorMessage>
-                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.nick_name}</Text>
-                  </FormControl.ErrorMessage>
-                }
-              </FormControl>
+            console.log(accessToken);
+            console.log(response);
 
-              <FormControl isInvalid={touched.email && !isValid}>
-              <FormControl.Label><Text style={styleSignUp.labelInput}>Email</Text></FormControl.Label>
-                <Input
-                  value={values.email}
-                  onChangeText={(text) => {
-                    handleChange('email')(text.toLowerCase())
-                    setFieldTouched('email', true)
-                  }}
-                  onBlur={() => setFieldTouched('email')}
-                  backgroundColor="#fff"
-                  borderRadius={8}
-                  placeholder="Type your email"
-                  InputLeftElement={<Icon name="envelope-o" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
-                  style={styleSignUp.input} />
-                {touched.email && errors.email &&
-                  <FormControl.ErrorMessage>
-                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.email}</Text>
-                  </FormControl.ErrorMessage>
-                }
-              </FormControl>
+            setIsLoading(false);
 
-              <FormControl isInvalid={touched.phone_number && !isValid}>
-              <FormControl.Label><Text style={styleSignUp.labelInput}>Phone number</Text></FormControl.Label>
-                <Input
-                  onChangeText={(text) => {
-                    handleChange('phone_number')(text.replace(/\D/g, '').slice(0, 11))
-                    setFieldTouched('phone_number', true)
-                  }}
-                  value={values.phone_number}
-                  onBlur={() => setFieldTouched('phone_number')}
-                  backgroundColor="#fff"
-                  borderRadius={8}
-                  placeholder="Typer your phone number"
-                  InputLeftElement={<Icon name="phone" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
-                  style={styleSignUp.input} />
-                {touched.phone && errors.phone &&
-                  <FormControl.ErrorMessage>
-                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.phone}</Text>
-                  </FormControl.ErrorMessage>
-                }
-              </FormControl>
+            return credentialName;
+        } catch (error) {
+            toast.show({
+                description: `ERROR: ${error}`
+            })
+            console.error(error);
+            setIsLoading(false);
+        }
+    };
 
-              <FormControl isInvalid={touched.password && !isValid}>
-              <FormControl.Label><Text style={styleSignUp.labelInput}>Password</Text></FormControl.Label>
-                <Input
-                  onChangeText={(text) => {
-                    handleChange('password')(text)
-                    setFieldTouched('password', true)
-                  }}
-                  value={values.password}
-                  onBlur={() => setFieldTouched('password')}
-                  backgroundColor="#fff"
-                  borderRadius={8}
-                  placeholder="Create your security password"
-                  InputLeftElement={<Icon name="lock" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
-                  style={styleSignUp.input}
-                  secureTextEntry={isPassword}
-                  InputRightElement={
-                    <Pressable onPress={() => setIsPassword(!isPassword)}>
-                      <Icon name={isPassword ? "eye" : "eye-slash"} size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />
-                    </Pressable>} />
-                {touched.password && errors.password &&
-                  <FormControl.ErrorMessage>
-                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.password}</Text>
-                  </FormControl.ErrorMessage>
-                }
-              </FormControl>
+    return (
+        <Box style={styleSignUp.container} >
+            <Formik
+                initialValues={{ name: '', nick_name: '', email: '', phone_number: '', password: '' }}
+                onSubmit={handleSubmit}
+                validationSchema={schemaValidation}
+            >
+                {({ handleChange, handleSubmit, setFieldTouched, touched, errors, values }) => (
+                    <>
+                        <Box style={styleSignUp.contentHeaderMessage}>
+                            <Text style={styleSignUp.headerTitleWelcome}>Vamos começar?</Text>
+                            <Text style={styleSignUp.headerTitleWelcomeSub}>Precisamos de alguns dados para{'\n'}continuar e acessar todos recursos!</Text>
+                        </Box>
+                        <ScrollView showsVerticalScrollIndicator={false} w={'100%'} >
+                            <Box style={styleSignUp.content}>
+                                <Box style={styleSignUp.formContent}>
+                                    <Box style={styleSignUp.form}>
+                                        <FormControl isInvalid={touched.name && errors.name}>
+                                            <FormControl.Label>
+                                                <Text style={styleSignUp.textLabel}>Name</Text>
+                                            </FormControl.Label>
+                                            <Input
+                                                value={values.name}
+                                                onChangeText={(text) => {
+                                                    handleChange('name')(text.replace(/[^a-zA-Z ]/g, ''))
+                                                    setFieldTouched('name', true)
+                                                }}
+                                                onBlur={() => setFieldTouched('name')}
+                                                backgroundColor="#fff"
+                                                borderRadius={8}
+                                                placeholder="Type your name"
+                                                InputLeftElement={
+                                                    <Icon name="user-o" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />
+                                                }
+                                                style={styleSignUp.input} />
+                                            {touched.name && errors.name &&
+                                                <FormControl.ErrorMessage>
+                                                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.name}</Text>
+                                                </FormControl.ErrorMessage>
+                                            }
+                                        </FormControl>
 
-              <Box style={styleSignUp.linkSignIn}>
-                <Link onPress={goToScreen}><Text style={styleSignUp.linkSignIn} >Already have an account, log in?</Text></Link>
-              </Box>
-            </Box>
+                                        <FormControl isInvalid={touched.nick_name && errors.nick_name}>
+                                            <FormControl.Label><Text style={styleSignUp.textLabel}>Nick Name</Text></FormControl.Label>
+                                            <Input
+                                                onChangeText={(text) => {
+                                                    handleChange('nick_name')(text);
+                                                    setFieldTouched('nick_name', true);
+                                                }}
+                                                value={values.nick_name}
+                                                onBlur={() => setFieldTouched('nick_name')}
+                                                backgroundColor="#fff"
+                                                borderRadius={8}
+                                                placeholder="Create a nickname"
+                                                InputLeftElement={<Icon name="at" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
+                                                style={styleSignUp.input} />
+                                            {touched.nick_name && errors.nick_name &&
+                                                <FormControl.ErrorMessage>
+                                                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.nick_name}</Text>
+                                                </FormControl.ErrorMessage>
+                                            }
+                                        </FormControl>
 
-            <Box >
-              <Button onPress={() => handleSubmit()} 
-              style={styleSignUp.button}
-              >{loading ? (
-                <Spinner color={'cyan.500'} />
-              ) : (
-                <Text style={styleSignUp.textButton}>SIGN UP</Text>
-              )}</Button>
-            </Box>
-          </ScrollView>
-        )}
-      </Formik>
-    </Box>
-  );
+                                        <FormControl isInvalid={touched.email && errors.email}>
+                                            <FormControl.Label><Text style={styleSignUp.textLabel}>Email</Text></FormControl.Label>
+                                            <Input
+                                                value={values.email}
+                                                onChangeText={(text) => {
+                                                    handleChange('email')(text.toLowerCase())
+                                                    setFieldTouched('email', true)
+                                                }}
+                                                onBlur={() => setFieldTouched('email')}
+                                                backgroundColor="#fff"
+                                                borderRadius={8}
+                                                placeholder="Type your email"
+                                                InputLeftElement={<Icon name="envelope-o" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
+                                                style={styleSignUp.input} />
+                                            {touched.email && errors.email &&
+                                                <FormControl.ErrorMessage>
+                                                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.email}</Text>
+                                                </FormControl.ErrorMessage>
+                                            }
+                                        </FormControl>
+
+                                        <FormControl isInvalid={touched.phone_number && errors.phone_number}>
+                                            <FormControl.Label><Text style={styleSignUp.textLabel}>Phone number</Text></FormControl.Label>
+                                            <Input
+                                                onChangeText={(text) => {
+                                                    handleChange('phone_number')(text.replace(/\D/g, '').slice(0, 11))
+                                                    setFieldTouched('phone_number', true)
+                                                }}
+                                                type="number"
+                                                value={values.phone_number}
+                                                onBlur={() => setFieldTouched('phone_number')}
+                                                backgroundColor="#fff"
+                                                borderRadius={8}
+                                                placeholder="Type your phone number"
+                                                InputLeftElement={<Icon name="phone" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
+                                                style={styleSignUp.input} />
+                                            {touched.phone_number && errors.phone_number &&
+                                                <FormControl.ErrorMessage>
+                                                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.phone_number}</Text>
+                                                </FormControl.ErrorMessage>
+                                            }
+                                        </FormControl>
+
+                                        <FormControl isInvalid={touched.password && errors.password}>
+                                            <FormControl.Label><Text style={styleSignUp.textLabel}>Password</Text></FormControl.Label>
+                                            <Input
+                                                onChangeText={(text) => {
+                                                    handleChange('password')(text)
+                                                    setFieldTouched('password', true)
+                                                }}
+                                                value={values.password}
+                                                onBlur={() => setFieldTouched('password')}
+                                                backgroundColor="#fff"
+                                                borderRadius={8}
+                                                placeholder="Create your security password"
+                                                InputLeftElement={<Icon name="lock" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
+                                                style={styleSignUp.input}
+                                                secureTextEntry={isPassword}
+                                                InputRightElement={
+                                                    <Pressable onPress={() => setIsPassword(!isPassword)}>
+                                                        <Icon name={isPassword ? "eye" : "eye-slash"} size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />
+                                                    </Pressable>} />
+                                            {touched.password && errors.password &&
+                                                <FormControl.ErrorMessage>
+                                                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.password}</Text>
+                                                </FormControl.ErrorMessage>
+                                            }
+                                        </FormControl>
+
+                                        <Box style={styleSignUp}>
+                                            <Pressable onPress={() => navigate('SignIn')}>
+                                                <Text style={styleSignUp.linkSignIn} >Already have an account, click Sign In</Text>
+                                            </Pressable>
+                                        </Box> </Box>
+
+                                </Box>
+
+                            </Box>
+
+                            <Box >
+                                <Button onPress={() => handleSubmit()} style={styleSignUp.button}>
+                                    {loading ? (<Spinner color={'cyan.500'} />) : (<Text style={styleSignUp.textButton}>sign up</Text>)}
+                                </Button>
+                            </Box>
+                        </ScrollView>
+                    </>
+
+                )}
+            </Formik>
+        </Box>
+    );
 }
