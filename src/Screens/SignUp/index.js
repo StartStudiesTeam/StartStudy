@@ -157,9 +157,9 @@ export default function SignUp() {
                   placeholder="Typer your phone number"
                   InputLeftElement={<Icon name="phone" size={20} color="#323232" style={{ marginLeft: 12, marginRight: 12 }} />}
                   style={styleSignUp.input} />
-                {touched.phone && errors.phone &&
+                {touched.phone_number && errors.phone_number &&
                   <FormControl.ErrorMessage>
-                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.phone}</Text>
+                    <Text style={{ fontSize: 12, color: '#FF0D10' }}>{errors.phone_number}</Text>
                   </FormControl.ErrorMessage>
                 }
               </FormControl>
