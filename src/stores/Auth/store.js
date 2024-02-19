@@ -53,16 +53,36 @@ export const AuthStore = create((set) => ({
             return error.message;
         }
     },
-    signUp: async ({ data }) => {
+    signUp: async (credential) => {
         try {
             const response = await api.post("/signup", {
-                name: data.name,
-                nickName: data.nickName,
-                email: data.email,
-                phoneNumber: data.phoneNumber,
-            })
+                name: credential.name,
+                nick_name: credential.nickName,
+                email: credential.email,
+                password: credential.password,
+                phone_number: credential.numberPhone,
+            });
+
+            if (response.body) {
+                const refreshToken = response.body.refreshToken.id;
+                const accessToken = response.body.accessToken;
+                const user = response.body.refreshToken.usersId;
+
+                set({
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
+                    user: user
+                });
+
+                await SaveStorage("accessToken", accessToken);
+                await SaveStorage("refreshToken", refreshToken);
+                await SaveStorage("user", user);
+            }
+
+            return response;
+
         } catch (error) {
-            console.log(error);
+            return error;
         }
     },
     recoveryPassword: async (data) => {
