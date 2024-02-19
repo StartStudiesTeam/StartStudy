@@ -111,6 +111,29 @@ const styleSignUp = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  titleSignUp: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    gap: 12,
+    alignSelf: 'stretch',
+    marginTop: 60,
+    marginLeft: '3%',
+    padding: 5,
+  },
+  titleOne: {
+    color: '#F3B852',
+    fontFamily: 'Ubuntu_500Medium',
+    fontSize: 26,
+    padding: 4,
+    marginLeft: -4,
+  },
+  subTitle: {
+    color: '#F0E3C9',
+    fontFamily: 'Ubuntu_300Light',
+    fontSize: 18,
+  },
 
 });
 
