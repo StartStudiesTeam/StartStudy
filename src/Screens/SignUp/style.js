@@ -107,7 +107,6 @@ const styleSignUp = StyleSheet.create({
     fontFamily: 'Ubuntu_700Bold',
     fontWeight: 400,
     letterSpacing: 0.5,
-    borderWidth: 1,
   },
   button: {
     backgroundColor: '#EBC95D',
