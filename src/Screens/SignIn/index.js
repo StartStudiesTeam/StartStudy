@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { useNavigation } from '@react-navigation/native';
-import { Input, Box, Text, Button, Pressable, FormControl, Spinner, useToast, Checkbox } from "native-base";
+import { Input, Box, Text, Button, Pressable, FormControl, Spinner, useToast, Checkbox, ScrollView } from "native-base";
 import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Formik } from "formik";
@@ -39,6 +39,8 @@ export default function SignIn() {
 
     return (
         <Box style={styleSignIn.container}>
+        <Box style={styleSignIn.box}>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <Formik
                 initialValues={{ email: '', password: '' }}
                 onSubmit={handleSubmit}
@@ -46,7 +48,9 @@ export default function SignIn() {
             >
                 {({ handleChange, handleSubmit, setFieldTouched, touched, errors, values }) => (
                     <>
-                        <Image source={require('../../Assets/BrandTest2.png')} style={styleSignIn.brandImage} />
+                        <Box style={styleSignIn.containerBrandImage}>
+                            <Image source={require('../../Assets/BrandTest2.png')} style={styleSignIn.brandImage} />
+                        </Box>
                         <Box style={styleSignIn.contentHeaderMessage}>
                             <Text style={styleSignIn.headerTitleWelcome}>Bem vindo de volta,</Text>
                             <Text style={styleSignIn.headerTitleWelcomeSub}>Estamos felizes em fazer parte da construção do seu conhecimento!</Text>
@@ -60,6 +64,7 @@ export default function SignIn() {
                                             style={styleSignIn.input}
                                             variant="filled"
                                             borderRadius={8}
+                                            backgroundColor="#fff"
                                             placeholder="Type your Email"
                                             value={values.email}
                                             onChangeText={(text) => {
@@ -80,6 +85,7 @@ export default function SignIn() {
                                             style={styleSignIn.input}
                                             variant="filled"
                                             borderRadius={8}
+                                            backgroundColor="#fff"
                                             type={showPassword ? "text" : "password"}
                                             placeholder="Type your Password"
                                             value={values.password}
@@ -119,7 +125,6 @@ export default function SignIn() {
                     </>
                 )}
             </Formik>
-
             <Box style={styleSignIn.contentLinksSecond}>
                 <TouchableOpacity onPress={() => navigate('SignUp')}>
                     <Text style={styleSignIn.labelLink}>Don't have an account, sign up?</Text>
@@ -128,6 +133,8 @@ export default function SignIn() {
                     <Text style={styleSignIn.labelLink}>Log in as a guest and not use all features?</Text>
                 </TouchableOpacity>
             </Box>
-        </Box >
+        </ScrollView>
+        </Box>
+        </Box>
     )
 }

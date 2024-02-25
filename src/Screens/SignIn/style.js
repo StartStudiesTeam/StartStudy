@@ -6,8 +6,9 @@ const styleSignIn = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 16,
     gap: 32,
+    paddingVertical: '2%',
+    paddingHorizontal: 16,
   },
   content: {
     width: '100%',
@@ -16,11 +17,26 @@ const styleSignIn = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  box: {
+    paddingVertical: '7%',
+  },
+  brandImage: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
+  containerBrandImage: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 16,
+  },
   contentHeaderMessage: {
     display: "flex",
     gap: 16,
     width: '100%',
     justifyContent: "flex-start",
+    paddingVertical: '10%',
   },
   headerTitleWelcome: {
     color: '#EBC95D',
@@ -35,11 +51,6 @@ const styleSignIn = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
     letterSpacing: 0.5,
-  },
-  brandImage: {
-    width: 100,
-    height: 100,
-    resizeMode: 'contain',
   },
   formContent: {
     width: '100%',
