@@ -4,28 +4,24 @@ const styleSignUp = StyleSheet.create({
   container: {
     backgroundColor: "#2B85A2",
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     gap: 16,
-    borderWidth: 1,
-    borderColor: 'red',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: '10%',
   },
   content: {
-    flexDirection: "column",
-    justifyContent: "center",
     width: '100%',
-    flex: 1,
-    backgroundColor: "#2B85A2",
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderColor: '#EBC95D',
   },
   contentHeaderMessage: {
     display: "flex",
     gap: 16,
     width: '100%',
     justifyContent: "flex-start",
+    marginBottom: 16,
   },
   headerTitleWelcome: {
     color: '#EBC95D',
@@ -41,7 +37,9 @@ const styleSignUp = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0.5,
   },
-
+  scrollview: {
+    width: '100%',
+  },
   formContent: {
     width: '100%',
     flexDirection: "column",
@@ -63,6 +61,18 @@ const styleSignUp = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0.5,
   },
+  iconInputLeft: {
+    color: '#323232',
+    marginLeft: 12,
+    marginRight: 12,
+    fontSize: 20,
+  },
+  iconInputRight: {
+    fontSize: 20,
+    color: '#323232',
+    marginLeft: 12,
+    marginRight: 12,
+  },
   textLabel: {
     color: "#FFF",
     alignSelf: 'stretch',
@@ -81,60 +91,34 @@ const styleSignUp = StyleSheet.create({
     letterSpacing: 0.5,
     alignSelf: "stretch",
   },
-  linkSignIn: {
-    width: 'auto',
+  contentClickSignIn: {
+    color: "#0B2C37",
+    alignSelf: 'flex-start',
+    fontFamily: 'Ubuntu_700Bold',
+    textAlignVertical: 'center',
+    fontSize: 12,
+    lineHeight: 12,
+    letterSpacing: 0.5,
+  },
+  labelClickSignIn: {
     display: 'flex',
     color: '#0B2C37',
     fontSize: 12,
     fontFamily: 'Ubuntu_700Bold',
     fontWeight: 400,
     letterSpacing: 0.5,
-    alignSelf: "stretch",
-    borderWidth: 1,
   },
   button: {
     backgroundColor: '#EBC95D',
     display: 'flex',
     width: 90,
-    margin: 56,
-    marginLeft: 138,
+    margin: 5,
   },
   textButton: {
     fontSize: 14,
     color: '#0B2C37',
     fontFamily: 'Ubuntu_500Medium',
   },
-  iconEye: {
-    position: "absolute",
-    top: 375,
-    left: 320,
-    width: "100%",
-    height: "100%",
-  },
-  titleSignUp: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    gap: 12,
-    alignSelf: 'stretch',
-    marginTop: 60,
-    marginLeft: '3%',
-    padding: 5,
-  },
-  titleOne: {
-    color: '#F3B852',
-    fontFamily: 'Ubuntu_500Medium',
-    fontSize: 26,
-    padding: 4,
-    marginLeft: -4,
-  },
-  subTitle: {
-    color: '#F0E3C9',
-    fontFamily: 'Ubuntu_300Light',
-    fontSize: 18,
-  },
-
 });
 
 export default styleSignUp;
