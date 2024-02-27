@@ -20,7 +20,7 @@ import styleRecoveryPassword from "./styles";
 import api from "../../Services/api";
 import validationForm from "./schemaValidation";
 
-export default function ConfirmEmail() {
+export default function RecoveryPassword() {
   const { navigate, goBack } = useNavigation();
   const [loading, setIsLoanding] = useState(false);
   const [isPassword, setIsPassword] = useState(true);
