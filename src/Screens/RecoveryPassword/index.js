@@ -12,12 +12,13 @@ import {
   ScrollView,
 } from "native-base";
 import { Image } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Formik } from "formik";
-import * as yup from "yup";
+import { Form, Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styleRecoveryPassword from "./styles";
 import api from "../../Services/api";
+import validationForm from "./schemaValidation";
 
 export default function ConfirmEmail() {
   const { navigate, goBack } = useNavigation();
@@ -48,118 +49,74 @@ export default function ConfirmEmail() {
   };
 
   return (
-    <Box style={styleRecoveryPassword.contarinerP}>
-      <ScrollView showsVerticalScrollIndicator={false}  style={styleRecoveryPassword.scrollContainer}>
-        <Formik
-          onSubmit={handleSubmit}
-          initialValues={{ newPassword: "" }}
-          validationSchema={yup.object().shape({
-            newPassword: yup
-              .string()
-              .min(8, "Password should be at least 8 chars long.")
-              .required("Password is required"),
-          })}
-        >
-          {({
-            handleChange,
-            handleSubmit,
-            setFieldTouched,
-            touched,
-            isValid,
-            errors,
-            values,
-          }) => (
-            <Box style={styleRecoveryPassword.containerSecundario}>
-              <Image
-                source={require("../../Assets/BrandTest2.png")}
-                style={{
-                  width: 89,
-                  resizeMode: "contain",
-                  position: "relative",
-                }}
-              />
-              <Box>
-                <Box style={styleRecoveryPassword.boxTexts}>
-                  <Text style={styleRecoveryPassword.textPrincipal}>
-                    Renove sua segurança!
-                  </Text>
-                  <Text style={styleRecoveryPassword.textSecundario}>
-                    Cadastre uma nova senha, e tenha{"\n"}
-                    acesso a todo recurso novamente!
-                  </Text>
+    <Box style={styleRecoveryPassword.container}>
+      <Box style={styleRecoveryPassword.box}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Formik
+                initialValues={{newPassword: ''}}
+                onSubmit={handleSubmit}
+                validationSchema={validationForm}
+          >
+            {({handleChange, handleSubmit, setFieldTouched, touched, errors, values}) => (
+              <>
+                <Box style={styleRecoveryPassword.containerBrandImage}>
+                  <Image source={require('../../Assets/BrandTest2.png')} />
                 </Box>
-                <FormControl
-                  isInvalid={!isValid}
-                  style={styleRecoveryPassword.containerForm}
-                >
-                  <FormControl.Label style={styleRecoveryPassword.titleInput}>
-                    <Text style={styleRecoveryPassword.titleInput}>
-                      New Password
-                    </Text>
-                  </FormControl.Label>
-                  <Input
-                    style={styleRecoveryPassword.input}
-                    value={values.newPassword}
-                    onChangeText={(text) => {
-                      handleChange("newPassword")(text);
-                      setFieldTouched("newPassword", true);
-                    }}
-                    onBlur={() => setFieldTouched("newPassword")}
-                    backgroundColor={"#FFFFFF"}
-                    color={"#000000"}
-                    variant="filled"
-                    placeholder="Type your new Password"
-                    secureTextEntry={isPassword}
-                    InputLeftElement={
-                      <Icon
-                        style={{ marginLeft: 17 }}
-                        name="lock"
-                        size={20}
-                        color="#323232"
-                      />
-                    }
-                    InputRightElement={
-                      <Pressable onPress={() => setIsPassword(!isPassword)}>
-                        <Icon
-                          name={isPassword ? "eye" : "eye-slash"}
-                          size={20}
-                          color="#323232"
-                          style={{ marginLeft: 12, marginRight: 12 }}
+                <Box style={styleRecoveryPassword.contentHeaderMessage}>
+                  <Text style={styleRecoveryPassword.headerTitleWelcome}>Renove sua segurança!</Text>
+                  <Text style={styleRecoveryPassword.headerTitleWelcomeSub}>Cadastre uma nova senha, e tenha acesso a todo recurso novamente!</Text>
+                </Box>
+                <Box style={styleRecoveryPassword.content}>
+                  <Box style={styleRecoveryPassword.formContent}>
+                    <Box style={styleRecoveryPassword.form}>
+                      <FormControl isInvalid={errors.newPassword && touched.newPassword} style={styleRecoveryPassword.formControl}>
+                        <Text style={styleRecoveryPassword.textLabel}>New Password</Text>
+                        <Input
+                              style={styleRecoveryPassword.input} 
+                              variant='filled'
+                              borderRadius={8}
+                              backgroundColor='#fff'
+                              placeholder="type your new password"
+                              values={values.newPassword}
+                              onChangeText={(text) => {
+                                handleChange('newPassword')(text)
+                              }}
+                              onBlur={() => setFieldTouched('newPassword')}
+                              InputLeftElement={
+                                <Icon name="lock" style={styleRecoveryPassword.iconInputLeft}/>
+                              }
+                              InputRightElement={
+                                <Pressable onPress={() => setIsPassword(!isPassword)}>
+                                  <Icon
+                                    name={isPassword ? 'eye' : 'eye-slash'}
+                                    style={styleRecoveryPassword.iconInputRight}
+                                  />
+                                </Pressable>
+                              }
+
                         />
-                      </Pressable>
-                    }
-                  />
-                  {touched.newPassword && errors.newPassword && (
-                    <FormControl.ErrorMessage>
-                      <Text>{errors.newPassword}</Text>
-                    </FormControl.ErrorMessage>
-                  )}
-                </FormControl>
-                <Link
-                  style={styleRecoveryPassword.linkSignIn}
-                  onPress={() => goToSignIn()}
-                >
-                  <Text style={styleRecoveryPassword.textLink}>
-                    Return and sign in?
-                  </Text>
-                </Link>
-              </Box>
-              <Box style={styleRecoveryPassword.boxBotao}>
-                <Button
-                  style={styleRecoveryPassword.button}
-                  onPress={() => handleSubmit()}
-                >
-                  {loading ? (
-                    <Spinner color={"cyan.500"} />
-                  ) : (
-                    <Text style={styleRecoveryPassword.textBotao}>SAVE</Text>
-                  )}
-                </Button>
-              </Box>
-            </Box>
-          )}
-        </Formik>
-      </ScrollView>
+                        <FormControl.ErrorMessage>
+                          {errors.newPassword}
+                        </FormControl.ErrorMessage>
+                      </FormControl>
+                      <Box style={styleRecoveryPassword.containerLink}>
+                        <TouchableOpacity onPress={() => goToSignIn()}>
+                          <Text style={styleRecoveryPassword.labelLink}>Return and sign in</Text>
+                        </TouchableOpacity>
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box>
+                    <Button onPress={() => handleSubmit()} style={styleRecoveryPassword.button}>
+                      {loading ? (<Spinner color={'cyan.500'} />) : (<Text style={styleRecoveryPassword.labelButton}>SAVE</Text>)}
+                    </Button>
+                  </Box>
+                </Box>
+              </>
+            )}
+          </Formik>
+        </ScrollView>
+      </Box>
     </Box>
   );
 }
