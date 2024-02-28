@@ -50,7 +50,7 @@ export const AuthStore = create((set) => ({
             return response;
 
         } catch (error) {
-            return error.message;
+            return error;
         }
     },
     signUp: async (credential) => {
@@ -81,6 +81,21 @@ export const AuthStore = create((set) => ({
 
             return response;
 
+        } catch (error) {
+            return error;
+        }
+    },
+    mailCheck: async (credential) => {
+        try {
+            const response = await api.post("/mailcheck", {
+                email: credential.email,
+            });
+
+            set({
+                user: {email: credential.email}
+            });
+
+            return response;
         } catch (error) {
             return error;
         }
