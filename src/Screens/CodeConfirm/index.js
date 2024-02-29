@@ -14,12 +14,16 @@ import { useNavigation } from "@react-navigation/native";
 import styleCodeConfirm from "./styles";
 import api from "../../Services/api";
 
-export default function ConfirmEmail() {
+export default function CodeConfirm() {
   const { navigate, goBack } = useNavigation();
   const [loading, setIsLoanding] = useState(false);
   const toast = useToast();
-
   const data = [];
+
+  const inputRefs = Array(6)
+  .fill()
+  .map(() => useRef(null));
+
 
   const submitCode = async () => {
     try {
@@ -52,6 +56,7 @@ export default function ConfirmEmail() {
     inputComponents.push(
       <Input
         key={index}
+        ref={inputRefs[index]}
         style={styleCodeConfirm.input}
         variant="filled"
         backgroundColor={"#FFF"}
@@ -62,6 +67,9 @@ export default function ConfirmEmail() {
         autoFocus={index === 0}
         onChangeText={(text) => {
           data[index] = text;
+          if (text !== "" && index < 5) {
+            inputRefs[index + 1].current.focus();
+          }
         }}
       />
     );
