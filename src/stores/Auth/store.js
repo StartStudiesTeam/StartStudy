@@ -3,6 +3,7 @@ import api from '../../Services/api';
 import { RemoveStorage, SaveStorage } from '../../utils/AsyncStorage';
 
 export const AuthStore = create((set) => ({
+    pageFlow: "",
     user: {},
     accessToken: null,
     refreshToken: null,
@@ -92,9 +93,33 @@ export const AuthStore = create((set) => ({
             });
 
             set({
-                user: {email: credential.email}
+                user: { email: credential.email }
             });
 
+            return response;
+        } catch (error) {
+            return error;
+        }
+    },
+    confirmCodeToken: async (credential) => {
+        try {
+            const response = await api.post("/codetoken", {
+                email: credential.email,
+                codeToken: credential.password,
+            });
+            if (response.body) {
+                const refreshToken = response.body.refreshToken.id;
+                const accessToken = response.body.accessToken;
+                const user = response.body.refreshToken.usersId;
+                set({
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
+                    user: user
+                });
+                await SaveStorage("accessToken", accessToken);
+                await SaveStorage("refreshToken", refreshToken);
+                await SaveStorage("user", user);
+            }
             return response;
         } catch (error) {
             return error;
