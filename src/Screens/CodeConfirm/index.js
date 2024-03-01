@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import {
   Input,
   Box,
@@ -60,14 +60,17 @@ export default function CodeConfirm() {
         style={styleCodeConfirm.input}
         variant="filled"
         backgroundColor={"#FFF"}
-        width={"16%"}
-        placeholder="|"
+        width="47px"
         keyboardType="default"
         maxLength={1}
         autoFocus={index === 0}
         onChangeText={(text) => {
           data[index] = text;
-          if (text !== "" && index < 5) {
+          if (text === "") {
+            if (index > 0) {
+              inputRefs[index - 1].current.focus();
+            }
+          } else if (text !== "" && index < 5) {
             inputRefs[index + 1].current.focus();
           }
         }}
@@ -76,57 +79,40 @@ export default function CodeConfirm() {
   }
 
   return (
-    <Box style={styleCodeConfirm.contarinerP}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styleCodeConfirm.scrollContainer}
-      >
-        <Box style={styleCodeConfirm.containerSecundario}>
-          <Box>
-            <Image
-              source={require("../../Assets/BrandTest2.png")}
-              style={{
-                width: 89,
-                resizeMode: "contain",
-                position: "relative",
-              }}
-            />
+    <Box style={styleCodeConfirm.container}>
+      <Box style={styleCodeConfirm.box}>
+        <ScrollView showsVerticalScrollIndicator={false} >
+          <Box style={styleCodeConfirm.containerBrandImage}>
+            <Image source={require('../../Assets/BrandTest2.png')} style={styleCodeConfirm.brandImage} />
           </Box>
-
-          <Box style={{ marginLeft: 16, marginRight: 16 }}>
-            <Box style={styleCodeConfirm.boxTexts}>
-              <Text style={styleCodeConfirm.labelInit}>
-                Você é você mesmo?!
-              </Text>
-              <Text style={styleCodeConfirm.labelText}>
-                Precisamos confirmar se você recebeu{"\n"}o código no seu e-mail
-                informado!
-              </Text>
-            </Box>
-            <Box>
-              <Text style={styleCodeConfirm.labelInput}>Code</Text>
+          <Box style={styleCodeConfirm.contentHeaderMessage}>
+            <Text style={styleCodeConfirm.headerTitleWelcome}>Você é você mesmo?!</Text>
+            <Text style={styleCodeConfirm.headerTitleWelcomeSub}>Precisamos confirma se você recebeu o código no seu e-mail informado!</Text>
+          </Box>
+          <Box style={styleCodeConfirm.content}>
+            <Box style={styleCodeConfirm.codeContent}>
               <Box style={styleCodeConfirm.boxCode}>
-                <>{inputComponents}</>
+                <Text style={styleCodeConfirm.textLabel}>Code</Text>
+                <Box style={styleCodeConfirm.code}>
+                  <>{inputComponents}</>
+                </Box>
+                <Box style={styleCodeConfirm.containerLink}>
+                  <TouchableOpacity onPress={() => goToSignUp()}>
+                    <Text style={styleCodeConfirm.labelLink}>Don't have an account? signup?</Text>
+                  </TouchableOpacity>
+                </Box>
               </Box>
             </Box>
-            <Link onPress={() => goToSignUp()} style={styleCodeConfirm.boxLink}>
-              <Text style={styleCodeConfirm.linkSignIn}>
-                Don't have an account? signup?
-              </Text>
-            </Link>
-          </Box>
-
-          <Box style={styleCodeConfirm.boxBotao}>
             <Button onPress={submitCode} style={styleCodeConfirm.button}>
               {loading ? (
-                <Spinner color={"cyan.500"} />
+                <Spinner color={'cyan.500'} />
               ) : (
-                <Text style={styleCodeConfirm.textBotao}>SIGN IN</Text>
-              )}
+                <Text style={styleCodeConfirm.labelButton}>SIGN IN</Text>
+              ) }
             </Button>
           </Box>
-        </Box>
-      </ScrollView>
+        </ScrollView>
+      </Box>
     </Box>
   );
 }
