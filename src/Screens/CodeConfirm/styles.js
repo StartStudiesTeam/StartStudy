@@ -1,121 +1,127 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-const { width } = Dimensions.get("window");
-
 const styleCodeConfirm = StyleSheet.create({
-  contarinerP: {
-    flex: 1,
+  container: {
     backgroundColor: "#2B85A2",
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    gap: 32,
+    paddingVertical: '2%',
+    paddingHorizontal: 16,
   },
-  containerSecundario: {
-    marginTop: 150,
+  box: {
     alignItems: "center",
     justifyContent: "center",
+    width: '100%',
   },
-  boxTexts: {
-    marginBottom: 56,
-    marginTop: 64,
+  containerBrandImage: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 16,
   },
-  labelInit: {
-    marginBottom: 8,
-    color: "#F3B852",
-    transform: [{ translateY: 6 }],
-    fontFamily: "Ubuntu_500Medium",
+  brandImage: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
+  contentHeaderMessage: {
+    display: "flex",
+    gap: 16,
+    width: '100%',
+    justifyContent: "flex-start",
+    paddingVertical: '10%',
+  },
+  headerTitleWelcome: {
+    color: '#EBC95D',
+    fontFamily: 'Ubuntu_500Medium',
     fontSize: 26,
-    fontWeight: 500,
     lineHeight: 24,
     letterSpacing: 0.5,
-    alignSelf: "stretch",
   },
-  labelText: {
-    marginBottom: 8,
-    color: "#FFF",
-    transform: [{ translateY: 6 }],
-    fontFamily: "Ubuntu_300Light",
+  headerTitleWelcomeSub: {
+    color: '#F0E3C9',
+    fontFamily: 'Ubuntu_300Light',
     fontSize: 18,
-    fontStyle: "normal",
-    fontWeight: 300,
-    lineHeight: 16,
+    lineHeight: 24,
     letterSpacing: 0.5,
-    padding: 3,
   },
-  labelInput: {
+  content: {
+    width: '100%',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 56,
+  },
+  codeContent: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 56,
+  },
+  boxCode: {
+    width: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 16,
+  },
+  textLabel: {
     alignSelf: "stretch",
     color: "#FFF",
     fontFamily: "Ubuntu_500Medium",
+    marginBottom: 8,
     fontSize: 16,
     fontStyle: "normal",
     fontWeight: 500,
     lineHeight: 16,
     letterSpacing: 0.5,
-    marginLeft: 4,
   },
-  boxCode: {
+  code: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 9,
-    marginBottom: 12,
-    marginTop: 8,
-    margin: 20,
+    width: '100%',
+    gap: 12,
   },
   input: {
     display: "flex",
     color: "#000000",
     textAlign: 'center',
     justifyContent: 'center',
-    padding: 12,
     fontFamily: "Ubuntu_300Light",
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.5,
     borderRadius: 8,
   },
-  boxLink: {
-    width: 200,
-  },
-  linkSignIn: {
-    color: "#0B2C37",
-    fontFamily: "Ubuntu_500Medium",
-    fontSize: 12,
-    fontWeight: 400,
-    letterSpacing: 0.5,
-    alignSelf: "stretch",
-    marginLeft: 4,
-  },
-  boxBotao: {
-    justifyContent: "center",
+  containerLink: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 56,
-    margin: 10,
   },
-  button: {
-    justifyContent: "center",
-    backgroundColor: "#EBC95D",
-    width: 89,
-    height: 36,
-  },
-  textBotao: {
-    alignItems: "center",
-    height: 36,
+  labelLink: {
     color: "#0B2C37",
     textAlign: "center",
+    alignSelf: "center",
     fontFamily: "Ubuntu_700Bold",
-    fontSize: 14,
-    fontWeight: 500,
-    lineHeight: 36,
-    letterSpacing: 1.25,
+    fontSize: 12,
+    lineHeight: 12,
+    letterSpacing: 0.5,
   },
-  boxImage: {
-    width: 120,
-    height: 120,
-    backgroundColor: "#D9D9D9",
-    borderRadius: 16,
+  button: {
+    backgroundColor: "#EBC95D",
+    display: "flex",
+    width: 90,
   },
-  scrollContainer: {
-    width: '100%',
+  labelButton: {
+    fontFamily: "Ubuntu_500Medium",
   },
 
 });
