@@ -12,40 +12,42 @@ import {
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import styleCodeConfirm from "./styles";
-import api from "../../Services/api";
+import { AuthStore } from "../../stores/Auth/store";
 
 export default function ConfirmEmail() {
+  const user = AuthStore((state) => state.user);
+  const pageFlow = AuthStore((state) => state.pageFlow);
+  const { confirmCodeToken } = AuthStore();
   const { navigate, goBack } = useNavigation();
-  const [loading, setIsLoanding] = useState(false);
+  const [loading, setIsLoading] = useState(false);
   const toast = useToast();
 
   const data = [];
 
   const submitCode = async () => {
-    try {
-      setIsLoanding(true);
-      const token = data.join("");
-      await api.post("/mailcheck", {
-        token,
-      });
-      toast.show({
-        description: `Codigo confirmado`,
-      });
-      setTimeout(() => {
-        setIsLoanding(false);
-        navigate("HomePage");
-      }, 2000);
-    } catch (error) {
-      toast.show({
-        description: `${error.message}`,
-      });
-      setIsLoanding(false);
-    }
-  };
+    setIsLoading(true);
 
-  async function goToSignUp() {
-    navigate("SignUp");
-  }
+    const codeToken = data.join("");
+
+    const response = await confirmCodeToken({
+      code: codeToken,
+      email: user.email,
+    });
+
+    toast.show({
+      description: `${response.message}`,
+    });
+
+    if (response.body && pageFlow == "recoveryPassword") {
+      navigate("NewPassword");
+    }
+
+    if (response.body) {
+      navigate("HomePage");
+    }
+
+    setIsLoading(false);
+  };
 
   let inputComponents = [];
   for (let index = 0; index <= 5; index++) {
@@ -91,7 +93,7 @@ export default function ConfirmEmail() {
                 Você é você mesmo?!
               </Text>
               <Text style={styleCodeConfirm.labelText}>
-                Precisamos confirmar se você recebeu{"\n"}o código no seu e-mail
+                Precisamos confirmar se você recebeu{"\n"}o código no e-mail
                 informado!
               </Text>
             </Box>
@@ -101,7 +103,7 @@ export default function ConfirmEmail() {
                 <>{inputComponents}</>
               </Box>
             </Box>
-            <Link onPress={() => goToSignUp()} style={styleCodeConfirm.boxLink}>
+            <Link onPress={() => navigate("SignUp")} style={styleCodeConfirm.boxLink}>
               <Text style={styleCodeConfirm.linkSignIn}>
                 Don't have an account? signup?
               </Text>
