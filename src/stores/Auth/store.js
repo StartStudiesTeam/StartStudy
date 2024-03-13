@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 import api from '../../Services/api';
-import { RemoveStorage, SaveStorage } from '../../utils/AsyncStorage';
+import { GetStorage, RemoveStorage, SaveStorage } from '../../utils/AsyncStorage';
 
 export const AuthStore = create((set) => ({
     pageFlow: "",
+    activeMenu: false,
     user: {},
     accessToken: null,
     refreshToken: null,
@@ -40,7 +41,8 @@ export const AuthStore = create((set) => ({
                 set({
                     accessToken: accessToken,
                     refreshToken: refreshToken,
-                    user: user
+                    user: user,
+                    activeMenu: true
                 });
 
                 await SaveStorage("accessToken", accessToken);
@@ -67,7 +69,7 @@ export const AuthStore = create((set) => ({
             if (response.body) {
                 const refreshToken = response.body.refreshToken.id;
                 const accessToken = response.body.accessToken;
-                const user = response.body.refreshToken.usersId;
+                const user = { email: credential.email };
 
                 set({
                     accessToken: accessToken,
@@ -77,7 +79,7 @@ export const AuthStore = create((set) => ({
 
                 await SaveStorage("accessToken", accessToken);
                 await SaveStorage("refreshToken", refreshToken);
-                await SaveStorage("user", user);
+                await SaveStorage("user", JSON.stringify(user));
             }
 
             return response;
@@ -103,23 +105,25 @@ export const AuthStore = create((set) => ({
     },
     confirmCodeToken: async (credential) => {
         try {
-            const response = await api.post("/codetoken", {
-                email: credential.email,
-                codeToken: credential.password,
+            const emailStorage = JSON.parse(await GetStorage("user")).email;
+
+            const response = await api.patch("/codetoken", {
+                email: emailStorage,
+                codeToken: credential.code,
             });
+
             if (response.body) {
-                const refreshToken = response.body.refreshToken.id;
+
                 const accessToken = response.body.accessToken;
-                const user = response.body.refreshToken.usersId;
+
                 set({
                     accessToken: accessToken,
-                    refreshToken: refreshToken,
-                    user: user
+                    activeMenu: true,
                 });
+
                 await SaveStorage("accessToken", accessToken);
-                await SaveStorage("refreshToken", refreshToken);
-                await SaveStorage("user", user);
             }
+
             return response;
         } catch (error) {
             return error;
