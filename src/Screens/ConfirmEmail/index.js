@@ -36,7 +36,7 @@ export default function ConfirmEmail() {
       description: `${response.message}`,
     });
 
-    if (response?.statusCode == 200) {
+    if (response?.statusCode == 201) {
       navigate("CodeConfirm");
     }
 
