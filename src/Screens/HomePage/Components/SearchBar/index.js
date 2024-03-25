@@ -9,7 +9,7 @@ export default function SearchBar() {
             <Box style={styles.containerSearch}>
 
                 <FormControl style={styles.formControlWrapper}>
-                    <Input style={styles.inputSearch} placeholder="Pesquisar" />
+                    <Input style={styles.inputSearch} placeholder="Pesquisar" borderRadius={8}/>
                 </FormControl>
 
                 <Button style={styles.buttonSearch}><Icon name="search" size={16} /></Button>

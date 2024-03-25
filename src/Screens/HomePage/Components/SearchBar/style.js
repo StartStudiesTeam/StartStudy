@@ -14,7 +14,6 @@ const styleHomePage = StyleSheet.create({
         fontSize: 12,
         lineHeight: 12,
         letterSpacing: 0.5,
-        borderRadius: 8,
         fontFamily: 'Ubuntu_400Regular',
     },
     buttonSearch: {
@@ -34,6 +33,7 @@ const styleHomePage = StyleSheet.create({
     containerTopics: {
         display: "flex",
         flexDirection: "row",
+        padding: 5,
     },
     topic: {
         borderWidth: 0.5,
