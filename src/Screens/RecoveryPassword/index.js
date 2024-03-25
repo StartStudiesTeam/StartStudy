@@ -16,34 +16,44 @@ import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styleRecoveryPassword from "./styles";
-import api from "../../Services/api";
 import validationForm from "./schemaValidation";
+import { isNotEmpty } from "../../utils/Variables";
+import { AuthStore } from "../../stores/Auth/store";
+
 
 export default function RecoveryPassword() {
   const { navigate, goBack } = useNavigation();
-  const [loading, setIsLoanding] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const toast = useToast();
+  const [loading, setIsLoading] = useState(false);
+  const [isPassword, setIsPassword] = useState(true);
+  const authUser = AuthStore((state) => state.pageFlow);
+  const { newPassword } = AuthStore();
 
-  async function goToSignIn() {
-    navigate("SignIn");
-  }
+  const toast = useToast();
 
   const handleSubmit = async (values) => {
     try {
-      setIsLoanding(true);
-      const response = await api.post("/forgetpassword", {
+      setIsLoading(true);
+
+      const response = await newPassword({
         newPassword: values.newPassword,
       });
-      setTimeout(() => {
-        navigate("SignIn");
-        setIsLoanding(false);
-      }, 2000);
+
+      toast.show({
+        description: `${response.message}`,
+      });
+
+      if (isNotEmpty(response.body) && authUser) {
+        navigate("HomePage");
+      }
+
+      setIsLoading(false);
+
     } catch (error) {
       toast.show({
         description: `${error.message}`,
       });
-      setIsLoanding(false);
+
+      setIsLoading(false);
     }
   };
 
@@ -52,11 +62,11 @@ export default function RecoveryPassword() {
       <Box style={styleRecoveryPassword.box}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Formik
-                initialValues={{newPassword: ''}}
-                onSubmit={handleSubmit}
-                validationSchema={validationForm}
+            initialValues={{ newPassword: '' }}
+            onSubmit={handleSubmit}
+            validationSchema={validationForm}
           >
-            {({handleChange, handleSubmit, setFieldTouched, touched, errors, values}) => (
+            {({ handleChange, handleSubmit, setFieldTouched, touched, errors, values }) => (
               <>
                 <Box style={styleRecoveryPassword.containerBrandImage}>
                   <Image source={require('../../Assets/BrandTest2.png')} />
@@ -71,33 +81,34 @@ export default function RecoveryPassword() {
                       <FormControl isInvalid={errors.newPassword && touched.newPassword} style={styleRecoveryPassword.formControl}>
                         <Text style={styleRecoveryPassword.textLabel}>New Password</Text>
                         <Input
-                              style={styleRecoveryPassword.input} 
-                              variant='filled'
-                              borderRadius={8}
-                              backgroundColor='#fff'
-                              placeholder="type your new password"
-                              type={showPassword ? "text" : "password"}
-                              values={values.newPassword}
-                              onChangeText={(text) => {
-                                handleChange('newPassword')(text)
-                              }}
-                              onBlur={() => setFieldTouched('newPassword')}
-                              InputLeftElement={
-                                <Icon name="lock" style={styleRecoveryPassword.iconInputLeft}/>
-                              }
-                              InputRightElement={
-                                <Pressable onPress={() => setShowPassword(!showPassword)}>
-                                  <Icon name={showPassword ? "eye" : "eye-slash"} style={styleRecoveryPassword.iconInputRight}/>
-                                </Pressable>
-                              }
-
+                          style={styleRecoveryPassword.input}
+                          variant='filled'
+                          borderRadius={8}
+                          backgroundColor='#fff'
+                          placeholder="type your new password"
+                          values={values.newPassword}
+                          onChangeText={(text) => {
+                            handleChange('newPassword')(text)
+                          }}
+                          onBlur={() => setFieldTouched('newPassword')}
+                          InputLeftElement={
+                            <Icon name="lock" style={styleRecoveryPassword.iconInputLeft} />
+                          }
+                          InputRightElement={
+                            <Pressable onPress={() => setIsPassword(!isPassword)}>
+                              <Icon
+                                name={isPassword ? 'eye' : 'eye-slash'}
+                                style={styleRecoveryPassword.iconInputRight}
+                              />
+                            </Pressable>
+                          }
                         />
                         <FormControl.ErrorMessage>
                           {errors.newPassword}
                         </FormControl.ErrorMessage>
                       </FormControl>
                       <Box style={styleRecoveryPassword.containerLink}>
-                        <TouchableOpacity onPress={() => goToSignIn()}>
+                        <TouchableOpacity onPress={() => navigate("SignIn")}>
                           <Text style={styleRecoveryPassword.labelLink}>Return and sign in</Text>
                         </TouchableOpacity>
                       </Box>
@@ -105,7 +116,7 @@ export default function RecoveryPassword() {
                   </Box>
                   <Box>
                     <Button onPress={() => handleSubmit()} style={styleRecoveryPassword.button}>
-                      {loading ? (<Spinner color={'cyan.500'} />) : (<Text style={styleRecoveryPassword.labelButton}>SAVE</Text>)}
+                      {loading ? (<Spinner color={'cyan.500'} />) : (<Text style={styleRecoveryPassword.labelButton}>Save</Text>)}
                     </Button>
                   </Box>
                 </Box>

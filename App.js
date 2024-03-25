@@ -19,7 +19,7 @@ import SplashScreen from 'expo-splash-screen';
 import { AuthStore } from './src/stores/Auth/store';
 
 export default function App() {
-  const user = AuthStore((state) => state.user);
+  const activeMenu = AuthStore((state) => state.activeMenu);
 
   const [isFontLoaded, error] = useFonts({
     Ubuntu_300Light,
@@ -36,11 +36,10 @@ export default function App() {
     return <AppLoading />;
   }
 
-
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Routes />
+       { activeMenu ? <MenuTabBottomNavigator /> : <Routes /> }  
       </NavigationContainer>
     </NativeBaseProvider>
   );
