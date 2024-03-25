@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import {
   Input,
   Box,
   Text,
   Button,
-  Link,
   Spinner,
   Pressable,
   FormControl,
@@ -14,7 +13,7 @@ import {
 import { Image } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Form, Formik } from "formik";
+import { Formik } from "formik";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styleRecoveryPassword from "./styles";
 import api from "../../Services/api";
@@ -23,7 +22,7 @@ import validationForm from "./schemaValidation";
 export default function RecoveryPassword() {
   const { navigate, goBack } = useNavigation();
   const [loading, setIsLoanding] = useState(false);
-  const [isPassword, setIsPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
 
   async function goToSignIn() {
@@ -77,6 +76,7 @@ export default function RecoveryPassword() {
                               borderRadius={8}
                               backgroundColor='#fff'
                               placeholder="type your new password"
+                              type={showPassword ? "text" : "password"}
                               values={values.newPassword}
                               onChangeText={(text) => {
                                 handleChange('newPassword')(text)
@@ -86,11 +86,8 @@ export default function RecoveryPassword() {
                                 <Icon name="lock" style={styleRecoveryPassword.iconInputLeft}/>
                               }
                               InputRightElement={
-                                <Pressable onPress={() => setIsPassword(!isPassword)}>
-                                  <Icon
-                                    name={isPassword ? 'eye' : 'eye-slash'}
-                                    style={styleRecoveryPassword.iconInputRight}
-                                  />
+                                <Pressable onPress={() => setShowPassword(!showPassword)}>
+                                  <Icon name={showPassword ? "eye" : "eye-slash"} style={styleRecoveryPassword.iconInputRight}/>
                                 </Pressable>
                               }
 
