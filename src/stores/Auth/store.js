@@ -2,9 +2,9 @@ import { create } from 'zustand';
 import api from '../../Services/api';
 import { GetStorage, RemoveStorage, SaveStorage } from '../../utils/AsyncStorage';
 
-export const AuthStore = create((set) => ({
+export const AuthStore = create((set, get) => ({
     pageFlow: "",
-    activeMenu: false,
+    authUser: false,
     user: {},
     accessToken: null,
     refreshToken: null,
@@ -16,12 +16,26 @@ export const AuthStore = create((set) => ({
         set({ refreshToken });
         await SaveStorage("refreshToken", refreshToken);
     },
+    setPageFlow: async (pageFlow) => {
+        set({ pageFlow });
+    },
+    setAuthUser: async () => {
+        const accessToken = get().accessToken.toString();
+        const user = get().user.toString();
+
+        if (accessToken && user) {
+            set({ authUser: true });
+        }
+    },
     signOut: async () => {
         set({
             accessToken: null,
             refreshToken: null,
             user: null,
+            authUser: false
         });
+
+        await RemoveStorage("authUser");
         await RemoveStorage("accessToken");
         await RemoveStorage("refreshToken");
         await RemoveStorage("user");
@@ -36,18 +50,18 @@ export const AuthStore = create((set) => ({
             if (response.body) {
                 const refreshToken = response.body.refreshToken.id;
                 const accessToken = response.body.accessToken;
-                const user = response.body.refreshToken.usersId;
+                const user = response.body.data;
 
                 set({
                     accessToken: accessToken,
                     refreshToken: refreshToken,
                     user: user,
-                    activeMenu: true
+                    authUser: true
                 });
 
                 await SaveStorage("accessToken", accessToken);
                 await SaveStorage("refreshToken", refreshToken);
-                await SaveStorage("user", user);
+                await SaveStorage("user", JSON.stringify(user));
             }
 
             return response;
@@ -69,7 +83,7 @@ export const AuthStore = create((set) => ({
             if (response.body) {
                 const refreshToken = response.body.refreshToken.id;
                 const accessToken = response.body.accessToken;
-                const user = { email: credential.email };
+                const user = response.body.data;
 
                 set({
                     accessToken: accessToken,
@@ -90,9 +104,13 @@ export const AuthStore = create((set) => ({
     },
     mailCheck: async (credential) => {
         try {
+            const user = { email: credential.email };
+
             const response = await api.post("/mailcheck", {
                 email: credential.email,
             });
+
+            SaveStorage("user", JSON.stringify(user));
 
             set({
                 user: { email: credential.email }
@@ -106,6 +124,7 @@ export const AuthStore = create((set) => ({
     confirmCodeToken: async (credential) => {
         try {
             const emailStorage = JSON.parse(await GetStorage("user")).email;
+            const pageFlow = get().pageFlow.toString();
 
             const response = await api.patch("/codetoken", {
                 email: emailStorage,
@@ -113,15 +132,15 @@ export const AuthStore = create((set) => ({
             });
 
             if (response.body) {
+                if ((pageFlow !== 'recoveryPassword')) {
+                    set({
+                        authUser: true,
+                    });
+                }
 
-                const accessToken = response.body.accessToken;
+                set({ accessToken: response.body.accessToken });
 
-                set({
-                    accessToken: accessToken,
-                    activeMenu: true,
-                });
-
-                await SaveStorage("accessToken", accessToken);
+                await SaveStorage("accessToken", response.body.accessToken);
             }
 
             return response;
@@ -129,14 +148,28 @@ export const AuthStore = create((set) => ({
             return error;
         }
     },
-    recoveryPassword: async (data) => {
+    newPassword: async (credential) => {
         try {
-            const response = await api.post("/forgetpassword", {
-                email: data.email,
-                newPassword: data.newPassword,
+            const emailStorage = JSON.parse(await GetStorage("user")).email;
+
+            const response = await api.put("/newpassword", {
+                email: emailStorage,
+                password: credential.newPassword,
             });
+
+            set({
+                accessToken: accessToken,
+                refreshToken: refreshToken,
+                user: user,
+                authUser: true,
+            });
+
+            await SaveStorage("accessToken", response.body.accessToken);
+            await SaveStorage("refreshToken", response.body.refreshToken);
+            await SaveStorage("user", response.body.refreshToken.usersId);
+
         } catch (error) {
-            console.log(error);
+            return (error);
         }
     }
 }));
