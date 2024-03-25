@@ -86,8 +86,8 @@ const styleRecoveryPassword = StyleSheet.create({
     marginRight: 12,
   },
   iconInputRight: {
+    color: '#ccc',
     fontSize: 20,
-    color: '#323232',
     marginLeft: 12,
     marginRight: 12,
   },
