@@ -3,8 +3,8 @@ import SignIn from '../../Screens/SignIn';
 import ConfirmEmail from '../../Screens/ConfirmEmail';
 import RecoveryPassword from '../../Screens/RecoveryPassword';
 import HomePage from '../../Screens/HomePage'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MenuTabBottom from '../MenuTabBottom';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const MenuTab = createBottomTabNavigator();
 
