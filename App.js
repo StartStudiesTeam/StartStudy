@@ -16,10 +16,11 @@ import {
 } from "@expo-google-fonts/ubuntu";
 import AppLoading from "expo-app-loading";
 import SplashScreen from 'expo-splash-screen';
+
 import { AuthStore } from './src/stores/Auth/store';
 
 export default function App() {
-  const activeMenu = AuthStore((state) => state.activeMenu);
+  const authUser = AuthStore((state) => state.authUser);
 
   const [isFontLoaded, error] = useFonts({
     Ubuntu_300Light,
@@ -39,7 +40,11 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-       { activeMenu ? <MenuTabBottomNavigator /> : <Routes /> }  
+        {authUser ?
+          (<MenuTabBottomNavigator />)
+          :
+          (<Routes />)
+        }
       </NavigationContainer>
     </NativeBaseProvider>
   );

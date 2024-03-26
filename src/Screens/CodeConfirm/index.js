@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import styleCodeConfirm from "./styles";
 import { AuthStore } from "../../stores/Auth/store";
+import { isNotEmpty } from "../../utils/Variables";
 
 export default function CodeConfirm() {
   const pageFlow = AuthStore((state) => state.pageFlow);
@@ -31,17 +32,13 @@ export default function CodeConfirm() {
       code: codeToken,
     });
 
-    console.log(response)
-
     toast.show({
       description: `${response.message}`,
     });
 
-    if (response.body && pageFlow == "recoveryPassword") {
-      navigate("NewPassword");
-    }
-
-    if (response.body) {
+    if (isNotEmpty(response.body) && pageFlow === "recoveryPassword") {
+      navigate("RecoveryPassword");
+    } else if (isNotEmpty(response.body)) {
       navigate("HomePage");
     }
 
@@ -107,7 +104,7 @@ export default function CodeConfirm() {
                     {loading ? (
                       <Spinner color={'cyan.500'} />
                     ) : (
-                      <Text style={styleCodeConfirm.labelButton}>SIGN IN</Text>
+                      <Text style={styleCodeConfirm.labelButton}>Enviar</Text>
                     )}
                   </Button>
                 </Box>

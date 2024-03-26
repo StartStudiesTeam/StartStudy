@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { GetStorage } from '../utils/AsyncStorage';
 
-const accessToken = GetStorage('accessToken');
-
 const api = axios.create({
-  baseURL: 'http://www.startstudies.com.br/api/v1',
+  baseURL: 'http://192.168.100.4/api/v1',
 });
 
 api.interceptors.request.use(
   async (config) => {
+
+    const accessToken = await GetStorage("accessToken");
+
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
