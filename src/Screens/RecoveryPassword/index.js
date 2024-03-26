@@ -24,7 +24,7 @@ import { AuthStore } from "../../stores/Auth/store";
 export default function RecoveryPassword() {
   const { navigate, goBack } = useNavigation();
   const [loading, setIsLoading] = useState(false);
-  const [isPassword, setIsPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const authUser = AuthStore((state) => state.pageFlow);
   const { newPassword } = AuthStore();
 
@@ -86,6 +86,7 @@ export default function RecoveryPassword() {
                           borderRadius={8}
                           backgroundColor='#fff'
                           placeholder="type your new password"
+                          type={showPassword ? "text" : "password"}
                           values={values.newPassword}
                           onChangeText={(text) => {
                             handleChange('newPassword')(text)
@@ -95,9 +96,9 @@ export default function RecoveryPassword() {
                             <Icon name="lock" style={styleRecoveryPassword.iconInputLeft} />
                           }
                           InputRightElement={
-                            <Pressable onPress={() => setIsPassword(!isPassword)}>
+                            <Pressable onPress={() => setShowPassword(!showPassword)}>
                               <Icon
-                                name={isPassword ? 'eye' : 'eye-slash'}
+                                name={showPassword ? "eye" : "eye-slash"}
                                 style={styleRecoveryPassword.iconInputRight}
                               />
                             </Pressable>
