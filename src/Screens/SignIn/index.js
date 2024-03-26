@@ -10,7 +10,7 @@ import validationForm from "./schemaValidation";
 import { AuthStore } from "../../stores/Auth/store";
 
 export default function SignIn() {
-    const { signIn } = AuthStore();
+    const { signIn, setPageFlow } = AuthStore();
     const { navigate } = useNavigation();
     const toast = useToast();
 
@@ -110,7 +110,7 @@ export default function SignIn() {
                                         <Checkbox onChange={() => setToggleCheckBox(true)} value={toggleCheckBox} >
                                             <Text style={styleSignIn.labelRemember}>Remember me</Text>
                                         </Checkbox>
-                                        <TouchableOpacity onPress={() => navigate('RecoveryPassword')}>
+                                        <TouchableOpacity onPress={() => { navigate('ConfirmEmail'); setPageFlow('recoveryPassword') } }>
                                             <Text style={styleSignIn.labelForgotPassword}>Forgot Password?</Text>
                                         </TouchableOpacity>
                                     </Box>
