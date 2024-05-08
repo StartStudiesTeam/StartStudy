@@ -1,6 +1,18 @@
 import { StyleSheet } from "react-native";
+import { font } from "../../../../../utils/Fonts/fonts";
 
 const styleFormVideo = StyleSheet.create({
+    containerTitle: {
+        fontSize: 20,
+        fontFamily: font.bold,
+        color: "gray",
+        marginVertical: 16,
+    },
+    iconInputLeft: {
+        color: '#323232',
+        marginLeft: 12,
+        fontSize: 20,
+    },
     boxFormVideo: {
         paddingVertical: 50,
         paddingHorizontal: 16,
@@ -11,7 +23,7 @@ const styleFormVideo = StyleSheet.create({
         alignItems: "center",
     },
     labelFormVideo: {
-        fontFamily: "Ubuntu_400Regular",
+        fontFamily: font.regular,
         color: "#595959",
         fontWeight: 400,
         fontSize: 16,
@@ -39,8 +51,7 @@ const styleFormVideo = StyleSheet.create({
     iconPlay: {
         paddingVertical: 50,
         fontSize: 40,
-        color: "#0973EF",
+        color: "#eeee",
     },
-  });
-  export default styleFormVideo;
-  
+});
+export default styleFormVideo;
