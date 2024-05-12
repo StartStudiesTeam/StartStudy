@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GetStorage } from '../utils/AsyncStorage';
 
 const api = axios.create({
-  baseURL: 'http://192.168.100.4/api/v1',
+  baseURL: 'https://startstudies.com.br/api/v1',
 });
 
 api.interceptors.request.use(
