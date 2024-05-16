@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { Box, Text, View, Button, Pressable } from 'native-base';
 import { Notebook, ThumbsUp, MessageSquare, Bookmark, EllipsisVertical, Play, Rocket } from 'lucide-react-native';
 import VideoPlay from '../VideoPlay';
+import Comments from '../Comments';
 
 import styleCardRoadmap from './style';
 
 const CardRoadmap = ({ title, content, index }) => {
     const [showVideo, setShowVideo] = useState(false);
+    const [showComments, setShowComments] = useState(true);
     const [isLiked, setIsLiked] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -40,7 +42,7 @@ const CardRoadmap = ({ title, content, index }) => {
                             <Pressable onPress={handleLike}>
                                 <ThumbsUp size={24} color={isLiked ? "blue" : "#8E8888"} />
                             </Pressable>
-                            <Pressable>
+                            <Pressable onPress={() => { setShowComments(true) }}>
                                 <MessageSquare size={24} color="#8E8888" />
                             </Pressable>
                             <Pressable onPress={handleBookmark}>
@@ -48,13 +50,17 @@ const CardRoadmap = ({ title, content, index }) => {
                             </Pressable>
                         </Box>
                         <Box style={styleCardRoadmap.actionRight}>
-                            <EllipsisVertical size={24} color="#8E8888" />
+                            <Pressable>
+                                <EllipsisVertical size={24} color="#8E8888" />
+                            </Pressable>
                         </Box>
                     </Box>
                 </Box>
             </Box >
 
             <VideoPlay show={showVideo} onClose={() => setShowVideo(false)} />
+
+            <Comments show={showComments} onClose={() => setShowComments(false)} />
         </>
     )
 };
