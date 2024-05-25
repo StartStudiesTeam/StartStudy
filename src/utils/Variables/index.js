@@ -29,3 +29,7 @@ export function isNotEmpty(value) {
 
     return true;
 }
+
+export function isEmptyString(str) {
+    return str.length === 0;
+}
