@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Routes from './src/Routes';
 import MenuTabBottomNavigator from './src/Components/MenuTabBottomNavigator';
 import { NativeBaseProvider } from "native-base";
 import {
@@ -17,11 +16,9 @@ import {
 import AppLoading from "expo-app-loading";
 import SplashScreen from 'expo-splash-screen';
 
-import { AuthStore } from './src/stores/Auth/store';
+import Routes from './src/Routes';
 
 export default function App() {
-  const authUser = AuthStore((state) => state.authUser);
-
   const [isFontLoaded, error] = useFonts({
     Ubuntu_300Light,
     Ubuntu_300Light_Italic,
@@ -40,11 +37,7 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        {authUser ?
-          (<MenuTabBottomNavigator />)
-          :
-          (<Routes />)
-        }
+        <Routes />
       </NavigationContainer>
     </NativeBaseProvider>
   );

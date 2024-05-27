@@ -1,8 +1,11 @@
 import { Actionsheet, Box, Text, Avatar, Button, ScrollView, View, Pressable, Divider } from "native-base";
 import { Languages, ChevronRight, User, Moon, BellDot, Handshake } from 'lucide-react-native';
 import styles from "./style";
+import { AuthStore } from "../../../stores/Auth/store";
 
 const AccountMenu = function (props) {
+
+    const { signOut } = AuthStore();
 
     return (
         <Actionsheet
@@ -72,7 +75,7 @@ const AccountMenu = function (props) {
                 </ScrollView>
                 <Divider mt={4} />
                 <Box style={styles.footer}>
-                    <Button variant={'outline'} size={'sm'} _text={{ color: 'red.300' }} >
+                    <Button variant={'outline'} size={'sm'} _text={{ color: 'red.300' }} leftIcon={<User color="#35f" size={20} />} onPress={() => { signOut() }} >
                         Sign Out
                     </Button>
                 </Box>

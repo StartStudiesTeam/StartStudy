@@ -1,13 +1,15 @@
 import { create } from 'zustand';
 import api from '../../Services/api';
 import { GetStorage, RemoveStorage, SaveStorage } from '../../utils/AsyncStorage';
+import { isEmpty, isEmptyString, isNotEmpty } from "../../utils/Variables";
 
 export const AuthStore = create((set, get) => ({
-    pageFlow: "",
-    authUser: false,
+    pageFlow: '',
+    signedGuest: false,
+    signedUser: false,
     user: {},
-    accessToken: null,
-    refreshToken: null,
+    accessToken: '',
+    refreshToken: '',
     setToken: async (accessToken) => {
         set({ accessToken });
         await SaveStorage("accessToken", accessToken);
@@ -19,20 +21,29 @@ export const AuthStore = create((set, get) => ({
     setPageFlow: async (pageFlow) => {
         set({ pageFlow });
     },
-    setAuthUser: async () => {
-        const accessToken = get().accessToken.toString();
-        const user = get().user.toString();
+    setSignedGuest: async () => {
+        const accessToken = get().accessToken;
+        const user = get().user;
 
-        if (accessToken && user) {
-            set({ authUser: true });
+        if (isEmptyString(accessToken) && isEmpty(user)) {
+            set({ signedGuest: true });
+        }
+    },
+    setSignedUser: async () => {
+        const accessToken = get().accessToken;
+        const user = get().user;
+
+        if (isNotEmpty(accessToken) && isNotEmpty(user)) {
+            set({ signedUser: true });
         }
     },
     signOut: async () => {
         set({
-            accessToken: null,
-            refreshToken: null,
-            user: null,
-            authUser: false
+            accessToken: '',
+            refreshToken: '',
+            user: {},
+            signedUser: false,
+            signedGuest: false
         });
 
         await RemoveStorage("authUser");
@@ -56,7 +67,7 @@ export const AuthStore = create((set, get) => ({
                     accessToken: accessToken,
                     refreshToken: refreshToken,
                     user: user,
-                    authUser: true
+                    signedUser: true
                 });
 
                 await SaveStorage("accessToken", accessToken);
@@ -134,7 +145,7 @@ export const AuthStore = create((set, get) => ({
             if (response.body) {
                 if ((pageFlow !== 'recoveryPassword')) {
                     set({
-                        authUser: true,
+                        signedUser: true,
                     });
                 }
 
@@ -161,7 +172,7 @@ export const AuthStore = create((set, get) => ({
                 accessToken: accessToken,
                 refreshToken: refreshToken,
                 user: user,
-                authUser: true,
+                signedUser: true,
             });
 
             await SaveStorage("accessToken", response.body.accessToken);

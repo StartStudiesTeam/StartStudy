@@ -6,11 +6,19 @@ import MenuTabBottom from '../MenuTabBottom';
 import AccountMenu from '../Menus/AccountMenu';
 import { useDisclose } from 'native-base';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigationState } from '@react-navigation/native';
 
 const MenuTab = createBottomTabNavigator();
 
 export default function MenuTabBottomNavigator() {
     const { isOpen, onClose, onOpen } = useDisclose();
+    const notShowIn = ['SignUp', 'SignIn', 'CodeConfirm', 'RecoveryPassword', 'ConfirmEmail'];
+    const state = useNavigationState(state => state);
+    const currentRouteName = state?.routes[state.index]?.name;
+
+    if (notShowIn.includes(currentRouteName)) {
+        return null;
+    }
 
     return (
         <>
