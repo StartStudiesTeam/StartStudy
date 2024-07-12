@@ -16,9 +16,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "plugins": [
-      "expo-video"
-    ]
+    "plugins": []
   },
   "compilerOptions": {
     "strict": true,
