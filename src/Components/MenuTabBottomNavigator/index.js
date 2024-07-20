@@ -1,7 +1,7 @@
 import SignUp from '../../Screens/SignUp';
 import ConfirmEmail from '../../Screens/ConfirmEmail';
 import HomePage from '../../Screens/HomePage'
-import Roadmap from '../../Screens/Roadmap/Register';
+import Roadmap from '../../Screens/Roadmap/Create';
 import MenuTabBottom from '../MenuTabBottom';
 import AccountMenu from '../Menus/AccountMenu';
 import { useDisclose } from 'native-base';
