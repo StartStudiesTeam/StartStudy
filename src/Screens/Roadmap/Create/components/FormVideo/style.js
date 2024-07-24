@@ -23,7 +23,8 @@ const styleFormVideo = StyleSheet.create({
         alignItems: "center",
     },
     labelFormVideo: {
-        fontFamily: font.regular,
+        textAlign: "center",
+        fontFamily: font.medium,
         color: "#595959",
         fontWeight: 400,
         fontSize: 16,

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { font } from "../../../../../utils/Fonts/fonts";
 
 const styleRegistration = StyleSheet.create({
     container: {
@@ -13,7 +14,7 @@ const styleRegistration = StyleSheet.create({
         paddingHorizontal: 16,
     },
     labelInput: {
-        fontFamily: "Ubuntu_400Regular",
+        fontFamily: font.regular,
         alignSelf: "stretch",
         fontSize: 16,
         fontWeight: 300,
@@ -28,17 +29,20 @@ const styleRegistration = StyleSheet.create({
         fontSize: 16,
         alignItems: "flex-start",
         alignSelf: "stretch",
-        fontFamily: "Ubuntu_400Regular",
+        fontFamily: font.regular,
         color: "#00000080",
     },
     iconInput: {
         display: "flex",
-        padding: 4,
         justifyContent: "center",
         alignItems: "center",
         fontSize: 14,
         color: '#ccc',
         paddingHorizontal: 12,
+    },
+    iconInputLeft: {
+        color: "#ccc",
+        marginLeft: 12,
     },
     containerTextArea: {
         display: "flex",
@@ -49,7 +53,7 @@ const styleRegistration = StyleSheet.create({
         paddingHorizontal: 16,
     },
     labelTextArea: {
-        fontFamily: "Ubuntu_400Regular",
+        fontFamily: font.regular,
         alignSelf: "stretch",
         fontSize: 16,
         fontWeight: 300,
@@ -57,10 +61,23 @@ const styleRegistration = StyleSheet.create({
         color: "#FFFFFF",
     },
     textArea: {
-        fontFamily: "Ubuntu_400Regular",
+        fontFamily: font.regular,
         color: "#00000080",
         fontSize: 14,
     },
-  });
-  export default styleRegistration;
-  
+    containerButton: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        alignSelf: "stretch",
+        paddingHorizontal: 16,
+        marginVertical: 8,
+    },
+    button: {
+        backgroundColor: "#77ADCB",
+        display: "flex",
+        width: 90,
+    },
+});
+export default styleRegistration;

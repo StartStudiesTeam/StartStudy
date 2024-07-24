@@ -1,0 +1,125 @@
+import { StyleSheet } from "react-native";
+import { font } from "../../../../../utils/Fonts/fonts";
+
+const styleCardRoadmap = StyleSheet.create({
+    container: {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        paddingVertical: 32,
+        paddingHorizontal: 20,
+    },
+    oddCard: {
+        width: '100%',
+        padding: 20,
+    },
+    content: {
+        minWidth: 244,
+        maxWidth: 260,
+    },
+    icon: {
+        position: 'relative',
+        top: '22.5%',
+        left: '22.5%',
+    },
+    circle: {
+        position: 'absolute',
+        width: 40,
+        height: 40,
+        borderRadius: 22,
+        backgroundColor: '#DDDDDD',
+        borderColor: '#fff',
+        borderWidth: 2,
+        top: '50%',
+        zIndex: 1,
+    },
+    circleRight: {
+        right: -20,
+    },
+    circleLeft: {
+        left: -20,
+    },
+    title: {
+        textAlign: 'center',
+        fontFamily: font.bold,
+        color: '#7C7171',
+        fontSize: 16,
+        lineHeight: 16,
+        letterSpacing: 0.5,
+        marginBottom: 8,
+        zIndex: 1,
+    },
+    line: {
+        position: 'absolute',
+        width: '58%',
+        top: 0,
+        bottom: -2.8,
+        right: 0,
+        borderTopEndRadius: 28,
+        borderBottomEndRadius: 28,
+        borderTopWidth: 3,
+        borderRightWidth: 3,
+        borderBottomWidth: 3,
+        borderColor: 'rgba(38, 79, 117, 0.5)',
+        zIndex: 0,
+    },
+    lineLeft: {
+        position: 'absolute',
+        width: '58%',
+        top: 0,
+        bottom: -2.8,
+        left: 0,
+        borderTopStartRadius: 28,
+        borderBottomStartRadius: 28,
+        borderTopWidth: 3,
+        borderLeftWidth: 3,
+        borderBottomWidth: 3,
+        borderColor: 'rgba(38, 79, 117, 0.5)',
+        zIndex: 0,
+    },
+    evenLine: {
+        right: 0,
+        borderTopRightRadius: 28,
+        borderBottomRightRadius: 28,
+    },
+    oddLine: {
+        left: 0,
+        borderTopLeftRadius: 28,
+        borderBottomLeftRadius: 28,
+    },
+    video: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "rgba(217, 217, 217, 0.25)",
+        borderColor: "rgba(0, 0, 0, 0.06)",
+        minHeight: 130,
+        maxHeight: 130,
+        minWidth: 242,
+        borderRadius: 16,
+        marginBottom: 12,
+    },
+    annotation: {
+        marginBottom: 12,
+    },
+    action: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 12,
+    },
+    actionLeft: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        gap: 20,
+    },
+    actionRight: {
+        flexDirection: 'row',
+        gap: 8,
+    },
+})
+
+export default styleCardRoadmap;
