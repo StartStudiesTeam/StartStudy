@@ -8,12 +8,12 @@ import { useState } from "react";
 import Carousel from 'react-native-snap-carousel';
 import styles from "./style";
 import { TouchableOpacity } from 'react-native';
-import { TrackPreviewStore } from "../../stores/Track/store";
+import { RoadmapStore } from "../../stores/Roadpmap/store.js";
 
 const TrackCarousel = (props) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const { updateNote } = TrackPreviewStore();
+    const { updateNote } = RoadmapStore();
 
     const carouselItems = props.items
 
