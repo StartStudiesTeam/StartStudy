@@ -79,5 +79,29 @@ const styleRegistration = StyleSheet.create({
         display: "flex",
         width: 90,
     },
+    containerCreated: {
+        gap: 32,
+        paddingHorizontal: 16,
+    },
+    contentCreatedBoxTitle: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    titleCreated: {
+        alignSelf: 'center',
+        fontFamily: font.bold,
+        color: '#7C7171',
+        fontSize: 16,
+        marginBottom: 8,
+        marginTop: 16,
+    },
+    buttonNoteCreated: {
+        display: "flex",
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+    },
 });
 export default styleRegistration;
