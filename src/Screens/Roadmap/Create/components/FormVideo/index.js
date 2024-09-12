@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import { Actionsheet, Box, Button, FormControl, Input, Text, TextArea } from "native-base";
+import { Actionsheet, Box, Button, FormControl, Input, Text, TextArea, useToast } from "native-base";
 import { BookType, Globe, NotebookPen } from "lucide-react-native";
 
 import schemaValidation from "../FormVideo/schemaValidation.js";
@@ -9,7 +9,6 @@ import { VideoStore } from "../../../../../stores/Video/store.js";
 
 export function FormVideo({ isOpen, onClose }) {
     const handleSubmit = async function (formVideo) {
-        const toast = useToast();
         const { getCurrentRoadmapId } = RoadmapStore();
         const { createVideo } = VideoStore();
         const roadmapId = await getCurrentRoadmapId();
@@ -38,7 +37,7 @@ export function FormVideo({ isOpen, onClose }) {
     return (
         <>
             <Actionsheet isOpen={isOpen} onClose={onClose} >
-                <Actionsheet.Content style={{ height: 700 }}>
+                <Actionsheet.Content style={{ paddingBottom: 64 }}>
                     <Formik
                         initialValues={{ url: '', title: '', description: '' }}
                         onSubmit={handleSubmit}
