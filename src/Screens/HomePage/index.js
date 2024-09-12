@@ -4,18 +4,17 @@ import styles from "./style";
 import CardTrackPreview from "../../Components/Cards/CardTrackPreview";
 import Header from "./Components/Header";
 import SearchBar from "./Components/SearchBar";
-import { TrackPreviewStore } from "../../stores/Track/store";
-
+// import { RoadmapStore } from "../../stores/Roadmap/store";--
 export default function HomePage() {
-  const ItemsTrackPreview = TrackPreviewStore((state) => state.body);
+  // const ItemsTrackPreview = RoadmapStore((state) => state.body);
 
   return (
     <Box style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-      <Header />
-      <SearchBar />
+        <Header />
+        <SearchBar />
         <Box style={styles.content}>
-          {
+          {/* {
             ItemsTrackPreview.map((item, index) =>
               <CardTrackPreview
                 key={index}
@@ -27,7 +26,7 @@ export default function HomePage() {
                 titleNote={item.newTitleNote}
               />
             )
-          }
+          } */}
         </Box>
       </ScrollView>
     </Box>
