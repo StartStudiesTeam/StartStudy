@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Animated, View, TouchableWithoutFeedback } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Plus } from "lucide-react-native";
+
 import styles from "./style"
 
 const MoreOptions = props => {
@@ -163,7 +165,7 @@ const MoreOptions = props => {
 
             <TouchableWithoutFeedback onPress={() => { toogleMenu() }}>
                 <Animated.View style={[styles.button, styles.menu, rotation]}>
-                    <Icon name='plus' color='#231F20' size={28} />
+                    <Plus size={24} color='#264F75' />
                 </Animated.View>
             </TouchableWithoutFeedback>
         </View>
