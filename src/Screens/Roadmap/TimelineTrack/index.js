@@ -5,7 +5,7 @@ import { NotebookPen } from "lucide-react-native";
 import Roadmap from "./components/TimelineRoadmap";
 import styleViewer from "./style";
 
-export default function ViewerRoadmap() {
+export default function TimelineTrack() {
     return (
         <Box style={styleViewer.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
