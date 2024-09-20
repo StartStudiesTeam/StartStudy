@@ -6,7 +6,9 @@ export const RoadmapStore = create((set, get) => ({
     getRoadmap: async (body) => {
         try {
             const response = await api.get("/roadmap", {
-                roadmapId: body.id
+                params: {
+                    roadmapId: body?.id,
+                },
             });
 
             return response;
@@ -15,11 +17,9 @@ export const RoadmapStore = create((set, get) => ({
             return error;
         }
     },
-    getRoadmaps: async (body) => {
+    getRoadmaps: async () => {
         try {
-            const response = await api.get("/roadmaps", {
-                roadmapId: body.id
-            });
+            const response = await api.get("/roadmaps");
 
             return response;
 
@@ -30,7 +30,7 @@ export const RoadmapStore = create((set, get) => ({
     createRoadmap: async (body) => {
         try {
             const response = await api.post("/roadmap", {
-                email: body?.id,
+                userId: body?.id,
                 title: body?.title,
                 description: body?.description,
             });
