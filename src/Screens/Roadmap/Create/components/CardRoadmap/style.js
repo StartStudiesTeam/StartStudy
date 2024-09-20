@@ -100,6 +100,7 @@ const styleCardRoadmap = StyleSheet.create({
         minWidth: 242,
         borderRadius: 16,
         marginBottom: 12,
+        gap: 8,
     },
     annotation: {
         marginBottom: 12,
@@ -119,6 +120,14 @@ const styleCardRoadmap = StyleSheet.create({
     actionRight: {
         flexDirection: 'row',
         gap: 8,
+    },
+    titleAddContent: {
+        fontFamily: font.bold,
+        color: '#aaa',
+        fontSize: 16,
+        lineHeight: 16,
+        letterSpacing: 0.5,
+        marginBottom: 8,
     },
 })
 
