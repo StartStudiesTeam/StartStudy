@@ -13,7 +13,7 @@ const styleHeader = StyleSheet.create({
     },
     profile: {
         flexDirection: 'row',
-
+        alignItems: 'center',
     },
     nick: {
         marginLeft: 4,
