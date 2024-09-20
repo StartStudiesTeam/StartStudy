@@ -11,11 +11,12 @@ const styleCreateRoadmap = StyleSheet.create({
         width: '100%',
     },
     labelFormVideo: {
+        marginBottom: 20,
         textAlign: "center",
         fontFamily: font.medium,
         color: "#595959",
-        fontWeight: 400,
-        fontSize: 16,
+        fontWeight: "400",
+        fontSize: 18,
     },
 });
 export default styleCreateRoadmap 
