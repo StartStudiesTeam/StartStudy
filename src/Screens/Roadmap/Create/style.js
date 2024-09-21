@@ -7,6 +7,7 @@ const styleRegisterRoad = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fffa',
+    paddingTop: 64,
   },
   title: {
     alignSelf: 'center',
